@@ -1,11 +1,11 @@
 ---
-description: After each iteration — Firebase deploy, indicative git commit, and push for easy rollback.
+description: After each iteration — deploy, QA live URLs, indicative commit, push.
 alwaysApply: true
 ---
 
-# End of iteration: deploy, commit, push
+# End of iteration: deploy, QA, commit, push
 
-This site is static files under `public/` and deploys to Firebase project **`gals-portfolio`**. Remote: **`origin`** on **`main`**.
+This site is static files under `public/` and deploys to Firebase project **`gals-portfolio`**. Remote: **`origin`** on **`main`**. Live: **`https://gals-portfolio.web.app`**.
 
 When you finish a **meaningful iteration** (changes under `public/`, `firebase.json`, `.firebaserc`, `package.json`, assets, or project rules/docs that belong in git), run this sequence from the project root **in order**:
 
@@ -21,7 +21,20 @@ Use **`FIREBASE_TOKEN`** in the environment for non-interactive deploy when no b
 
 If `npm`/`node` is missing in the agent shell, tell the user to run the same commands in their terminal (after Node is installed and `PATH` is correct).
 
-## 2. Commit (only if there are changes)
+## 2. QA the live site (required)
+
+After a successful deploy, **verify the hosted build yourself** before committing (or immediately after, before push). The agent cannot replace a human design review, but it **must** still run automated checks:
+
+1. **Fetch** `https://gals-portfolio.web.app/` — expect **200** and HTML that includes the hero / layout (e.g. `Gal Nakel`, `drag-stage`).
+2. **Fetch** `https://gals-portfolio.web.app/work.html?id=zormim` (and at least one other `id` if you changed routing) — expect **200** and `work-title` / back link content.
+3. **Fetch** `https://gals-portfolio.web.app/js/projects.json` — expect **200** and parseable JSON.
+4. **Optional:** `curl -sI` on the same URLs to confirm no accidental **404/500** on assets you changed.
+
+Use the **WebFetch** tool (or `curl` in the terminal) for these checks. If any check fails, **fix, redeploy, and re-run QA** before the git commit. Summarize pass/fail briefly for the user.
+
+**Limits:** this does not validate drag-and-drop feel, fonts, or pixel layout; call out that visual/interaction QA is still for the browser.
+
+## 3. Commit (only if there are changes)
 
 ```bash
 git status
@@ -39,7 +52,7 @@ Use an **indicative** message so rollback and history are readable, for example:
 
 If **`git status`** is clean after deploy, **skip commit** (nothing new to record). Deploy does not change tracked files unless the build step wrote into the repo (this project does not).
 
-## 3. Push
+## 4. Push
 
 ```bash
 git push origin main
