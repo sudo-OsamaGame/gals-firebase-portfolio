@@ -1,0 +1,34 @@
+---
+description: Deploy static portfolio to Firebase Hosting after changes; only prompt user for auth/token if deploy fails.
+alwaysApply: true
+---
+
+# Firebase Hosting — deploy after iterations
+
+This site is static files under `public/` and deploys to Firebase project `gals-portfolio`.
+
+## After you change the app
+
+When you finish a meaningful iteration (HTML/CSS/JS under `public/`, new media in `public/media/`, or `firebase.json` / `.firebaserc`), run hosting deploy from the project root:
+
+```bash
+npm install
+npm run deploy
+```
+
+Firebase CLI uses **`FIREBASE_TOKEN`** for non-interactive deploy (no browser). The user mints it once with `firebase login:ci` and must expose it to the environment Cursor’s terminal inherits.
+
+If `npm` is missing from PATH in the agent shell, tell the user to install Node (LTS), restart Cursor, and ensure `which npm` works in **Cursor’s integrated terminal** (same environment the agent should use).
+
+## Human steps (only when deploy fails)
+
+- **Interactive login:** `npx firebase-tools login` once, then `npm run deploy` (only works when a browser can complete login).
+- **Agent / CI (recommended):** run locally `npx firebase-tools login:ci`, copy the token, then either:
+  - **Cloud Agents:** add secret `FIREBASE_TOKEN` in [Cursor Cloud Agents / Secrets](https://cursor.com/dashboard/cloud-agents) (dashboard), **or**
+  - **Local Agent:** export `FIREBASE_TOKEN` in the shell profile Cursor inherits (e.g. launch Cursor from a terminal where you `export FIREBASE_TOKEN=…`, or add to `~/.zshrc` and restart Cursor), **or** use [direnv](https://direnv.net/) with a gitignored `.envrc` that exports `FIREBASE_TOKEN`.
+
+Never commit the token. Add `.envrc` / `.env.local` to `.gitignore` if used.
+
+Deploy may need **network** (and sometimes **all** permissions) in the agent terminal for `firebase deploy`.
+
+Do **not** add Firebase Authentication for this portfolio unless the user asks; public gallery is the product.

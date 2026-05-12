@@ -1,0 +1,15 @@
+{
+  "name": "gals-portfolio",
+  "private": true,
+  "scripts": {
+    "deploy": "firebase deploy --only hosting",
+    "serve": "firebase emulators:start --only hosting"
+  },
+  "devDependencies": {
+    "firebase-tools": "^15.17.0"
+  },
+  "dependencies": {
+    "firebase": "^12.13.0",
+    "gh": "^2.8.9"
+  }
+}
