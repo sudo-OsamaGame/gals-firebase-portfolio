@@ -2,7 +2,7 @@ import { app } from "./firebase-init.js";
 
 void app;
 
-const STORAGE_KEY = "gals-portfolio-shape-positions-v2";
+const STORAGE_KEY = "gals-portfolio-shape-positions-v3";
 const DRAG_THRESHOLD = 10;
 
 /** @typedef {{ id: string, shape: string, label: string, defaultPosition: { leftPct: number, topPct: number } }} HomeDraggable */

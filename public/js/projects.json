@@ -8,25 +8,25 @@
       "id": "zormim",
       "shape": "blob-blue",
       "label": "ZORMIM\nHAYARKON",
-      "defaultPosition": { "leftPct": 52, "topPct": 14 }
+      "defaultPosition": { "leftPct": 16, "topPct": 24 }
     },
     {
       "id": "smores",
       "shape": "oval-green",
       "label": "S'MORES",
-      "defaultPosition": { "leftPct": 82, "topPct": 18 }
+      "defaultPosition": { "leftPct": 86, "topPct": 22 }
     },
     {
       "id": "cloud-nine",
       "shape": "star-yellow",
       "label": "CLOUD\nNINE",
-      "defaultPosition": { "leftPct": 22, "topPct": 62 }
+      "defaultPosition": { "leftPct": 18, "topPct": 72 }
     },
     {
       "id": "exponential",
       "shape": "diamond-orange",
       "label": "EXPONENTIAL",
-      "defaultPosition": { "leftPct": 76, "topPct": 68 }
+      "defaultPosition": { "leftPct": 84, "topPct": 76 }
     }
   ],
   "projects": {
