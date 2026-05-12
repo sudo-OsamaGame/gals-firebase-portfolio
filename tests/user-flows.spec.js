@@ -2,10 +2,13 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("Live site — user-facing flows", () => {
-  test("home: hero, footer, and four project shapes", async ({ page }) => {
+  test("home: banner base, logo, footer, and four project shapes", async ({
+    page,
+  }) => {
     await page.goto("/");
     await expect(page).toHaveTitle(/Gal Nakel/i);
-    await expect(page.locator("#hero-name")).toHaveText("Gal Nakel");
+    await expect(page.locator(".hero-banner")).toBeVisible();
+    await expect(page.locator(".site-logo")).toBeVisible();
     await expect(page.locator("#site-footer")).toContainText("Shenkar");
     for (const id of ["zormim", "smores", "cloud-nine", "exponential"]) {
       await expect(

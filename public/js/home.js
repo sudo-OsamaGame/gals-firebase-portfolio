@@ -2,7 +2,7 @@ import { app } from "./firebase-init.js";
 
 void app;
 
-const STORAGE_KEY = "gals-portfolio-shape-positions-v1";
+const STORAGE_KEY = "gals-portfolio-shape-positions-v2";
 const DRAG_THRESHOLD = 10;
 
 /** @typedef {{ id: string, shape: string, label: string, defaultPosition: { leftPct: number, topPct: number } }} HomeDraggable */
@@ -128,32 +128,6 @@ async function main() {
   const data = await res.json();
 
   document.getElementById("site-footer").textContent = data.site.footer;
-
-  const heroName = document.getElementById("hero-name");
-  if (heroName) heroName.textContent = data.site.name;
-
-  const line1 = document.getElementById("hero-line1");
-  const cheers = document.getElementById("hero-cheers");
-  const line2 = document.getElementById("hero-line2");
-  if (line1) line1.textContent = data.site.heroLine1;
-  if (cheers) cheers.textContent = data.site.heroCheers;
-  if (line2) line2.textContent = data.site.heroLine2;
-
-  const portrait = document.getElementById("hero-portrait");
-  const wrap = document.getElementById("portrait-wrap");
-  if (portrait && wrap) {
-    const src = (data.site.portraitSrc || "").trim();
-    if (src) {
-      portrait.onload = () => wrap.classList.remove("portrait-missing");
-      portrait.onerror = () => {
-        portrait.removeAttribute("src");
-        portrait.alt = "";
-        wrap.classList.add("portrait-missing");
-      };
-      portrait.src = src;
-      portrait.alt = data.site.portraitAlt || data.site.name;
-    }
-  }
 
   const stage = document.getElementById("drag-stage");
   if (!stage) return;
