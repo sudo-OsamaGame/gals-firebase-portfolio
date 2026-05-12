@@ -144,15 +144,23 @@
         user-select: none;
         pointer-events: none;
         filter: none;
-        transition: filter 0.28s ease;
+        transform: scale(1);
+        transform-origin: center center;
+        transition: transform 0.22s ease, filter 0.28s ease;
       }
       html[data-theme="dark"] .shape-btn.shape--image img {
         filter:
           drop-shadow(0 0 10px rgb(130 200 255 / 0.55))
           drop-shadow(0 0 22px rgb(100 175 255 / 0.42))
           drop-shadow(0 0 38px rgb(90 150 255 / 0.28));
+        transform: scale(1);
       }
-      html[data-theme="dark"] .shape-btn.shape--image:hover img {
+      .shape-btn.shape--image:hover img,
+      .shape-btn.shape--image:focus-visible img {
+        transform: scale(1.15);
+      }
+      html[data-theme="dark"] .shape-btn.shape--image:hover img,
+      html[data-theme="dark"] .shape-btn.shape--image:focus-visible img {
         filter:
           drop-shadow(0 0 14px rgb(160 220 255 / 0.7))
           drop-shadow(0 0 28px rgb(120 195 255 / 0.5))
