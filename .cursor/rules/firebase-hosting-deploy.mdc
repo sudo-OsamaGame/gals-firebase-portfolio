@@ -1,34 +1,55 @@
 ---
-description: Deploy static portfolio to Firebase Hosting after changes; only prompt user for auth/token if deploy fails.
+description: After each iteration — Firebase deploy, indicative git commit, and push for easy rollback.
 alwaysApply: true
 ---
 
-# Firebase Hosting — deploy after iterations
+# End of iteration: deploy, commit, push
 
-This site is static files under `public/` and deploys to Firebase project `gals-portfolio`.
+This site is static files under `public/` and deploys to Firebase project **`gals-portfolio`**. Remote: **`origin`** on **`main`**.
 
-## After you change the app
+When you finish a **meaningful iteration** (changes under `public/`, `firebase.json`, `.firebaserc`, `package.json`, assets, or project rules/docs that belong in git), run this sequence from the project root **in order**:
 
-When you finish a meaningful iteration (HTML/CSS/JS under `public/`, new media in `public/media/`, or `firebase.json` / `.firebaserc`), run hosting deploy from the project root:
+## 1. Deploy Hosting
 
 ```bash
+export PATH="/usr/local/bin:/opt/homebrew/bin:$PATH"
 npm install
 npm run deploy
 ```
 
-Firebase CLI uses **`FIREBASE_TOKEN`** for non-interactive deploy (no browser). The user mints it once with `firebase login:ci` and must expose it to the environment Cursor’s terminal inherits.
+Use **`FIREBASE_TOKEN`** in the environment for non-interactive deploy when no browser is available ([`firebase login:ci`](https://firebase.google.com/docs/cli#cli-ci-systems)). Never commit tokens.
 
-If `npm` is missing from PATH in the agent shell, tell the user to install Node (LTS), restart Cursor, and ensure `which npm` works in **Cursor’s integrated terminal** (same environment the agent should use).
+If `npm`/`node` is missing in the agent shell, tell the user to run the same commands in their terminal (after Node is installed and `PATH` is correct).
 
-## Human steps (only when deploy fails)
+## 2. Commit (only if there are changes)
 
-- **Interactive login:** `npx firebase-tools login` once, then `npm run deploy` (only works when a browser can complete login).
-- **Agent / CI (recommended):** run locally `npx firebase-tools login:ci`, copy the token, then either:
-  - **Cloud Agents:** add secret `FIREBASE_TOKEN` in [Cursor Cloud Agents / Secrets](https://cursor.com/dashboard/cloud-agents) (dashboard), **or**
-  - **Local Agent:** export `FIREBASE_TOKEN` in the shell profile Cursor inherits (e.g. launch Cursor from a terminal where you `export FIREBASE_TOKEN=…`, or add to `~/.zshrc` and restart Cursor), **or** use [direnv](https://direnv.net/) with a gitignored `.envrc` that exports `FIREBASE_TOKEN`.
+```bash
+git status
+git add -A
+git commit -m "<type>: <short imperative description>"
+```
 
-Never commit the token. Add `.envrc` / `.env.local` to `.gitignore` if used.
+Use an **indicative** message so rollback and history are readable, for example:
 
-Deploy may need **network** (and sometimes **all** permissions) in the agent terminal for `firebase deploy`.
+- `feat: add video tile for thesis reel`
+- `fix: correct lightbox focus trap on mobile`
+- `content: reorder works.json and update captions`
+- `chore: bump firebase-tools`
+- `style: tighten gallery grid spacing`
 
-Do **not** add Firebase Authentication for this portfolio unless the user asks; public gallery is the product.
+If **`git status`** is clean after deploy, **skip commit** (nothing new to record). Deploy does not change tracked files unless the build step wrote into the repo (this project does not).
+
+## 3. Push
+
+```bash
+git push origin main
+```
+
+If push fails (**401**, auth, or network), tell the user to fix credentials (PAT, SSH, or `gh auth login`) and run `git push` themselves; do not drop the local commit.
+
+---
+
+## Scope reminders
+
+- Do **not** add Firebase Authentication for this public gallery unless the user asks.
+- Do **not** commit `.env`, `.env.local`, `FIREBASE_TOKEN`, or secrets.
