@@ -10,6 +10,17 @@
       content="Gal Nakel — Visual Communication, Shenkar. Interactive portfolio."
     />
     <title>Gal Nakel — portfolio</title>
+    <script>
+      (function () {
+        try {
+          var k = "gals-portfolio-theme";
+          var t = localStorage.getItem(k);
+          if (t === "dark" || t === "light")
+            document.documentElement.setAttribute("data-theme", t);
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="./css/theme.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -17,20 +28,6 @@
       rel="stylesheet"
     />
     <style>
-      :root {
-        --bg: #ffffff;
-        --ink: #111111;
-        --muted: #4a4a4a;
-        --blue: #0047ff;
-        --blue-nav: #0047ff;
-        --green: #a6ff00;
-        --yellow: #ffff00;
-        --orange: #ffb800;
-        --pill-border: #0047ff;
-        --font-body: "DM Sans", system-ui, sans-serif;
-        --font-shapes: "Arial Narrow", "Helvetica Neue Condensed", "Helvetica Condensed",
-          var(--font-body);
-      }
       * {
         box-sizing: border-box;
       }
@@ -83,9 +80,6 @@
         border: 2px solid var(--pill-border);
         border-radius: 999px;
         padding: 0.35rem 0.85rem;
-      }
-      .nav-pills a:hover {
-        background: color-mix(in srgb, var(--blue) 8%, white);
       }
       .main-area {
         flex: 1;
@@ -246,10 +240,24 @@
       <a class="logo-link" href="./" aria-label="Gal Nakel — home">
         <img class="site-logo" src="/media/logo.png" alt="Gal Nakel" width="320" height="80" />
       </a>
-      <nav class="nav-pills" aria-label="Primary">
-        <a href="./work.html?id=about-me">about me</a>
-        <a href="./work.html?id=side-quests">side quests &amp; fun stuff</a>
-      </nav>
+      <div class="header-tools">
+        <button
+          type="button"
+          class="theme-toggle"
+          data-theme-toggle
+          aria-pressed="false"
+          aria-label="Switch to black screen"
+        >
+          <span class="theme-toggle__swatches" aria-hidden="true">
+            <span></span><span></span>
+          </span>
+          <span class="theme-toggle__label">Black screen</span>
+        </button>
+        <nav class="nav-pills" aria-label="Primary">
+          <a href="./work.html?id=about-me">about me</a>
+          <a href="./work.html?id=side-quests">side quests &amp; fun stuff</a>
+        </nav>
+      </div>
     </header>
 
     <div class="main-area">

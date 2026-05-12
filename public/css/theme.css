@@ -1,0 +1,118 @@
+/* Light (default) + dark — toggled via <html data-theme="dark"> */
+
+:root {
+  color-scheme: light;
+  --bg: #ffffff;
+  --ink: #111111;
+  --muted: #4a4a4a;
+  --blue: #0047ff;
+  --blue-nav: #0047ff;
+  --green: #a6ff00;
+  --yellow: #ffff00;
+  --orange: #ffb800;
+  --pill-border: #0047ff;
+  --work-media-bg: #f0f0f0;
+  --work-blue: #1b6cff;
+  --font-body: "DM Sans", system-ui, sans-serif;
+  --font-shapes: "Arial Narrow", "Helvetica Neue Condensed", "Helvetica Condensed",
+    var(--font-body);
+  --font-display: "Caveat", cursive;
+  --theme-toggle-bg: #f4f4f4;
+  --theme-toggle-border: #111111;
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #050505;
+  --ink: #f4f4f4;
+  --muted: #a3a3a3;
+  --blue: #3d7dff;
+  --blue-nav: #9ec0ff;
+  --green: #b4ff3a;
+  --yellow: #fff59a;
+  --orange: #ffcc55;
+  --pill-border: #9ec0ff;
+  --work-media-bg: #141414;
+  --work-blue: #7eb0ff;
+  --theme-toggle-bg: #1e1e1e;
+  --theme-toggle-border: #e8e8e8;
+}
+
+html[data-theme="dark"] .nav-pills a:hover {
+  background: color-mix(in srgb, var(--blue-nav) 14%, transparent);
+}
+
+.back:hover {
+  background: color-mix(in srgb, var(--work-blue) 8%, white);
+}
+
+html[data-theme="dark"] .back:hover {
+  background: color-mix(in srgb, var(--work-blue) 12%, transparent);
+}
+
+.nav-pills a:hover {
+  background: color-mix(in srgb, var(--blue) 8%, white);
+}
+
+.header-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem;
+  justify-content: flex-end;
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.3rem 0.65rem;
+  border: 2px solid var(--pill-border);
+  border-radius: 999px;
+  background: var(--theme-toggle-bg);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.2;
+}
+
+.theme-toggle:hover {
+  filter: brightness(1.05);
+}
+
+.theme-toggle__swatches {
+  display: inline-flex;
+  gap: 3px;
+  align-items: center;
+}
+
+.theme-toggle__swatches span {
+  display: block;
+  width: 13px;
+  height: 13px;
+  border-radius: 3px;
+  border: 1px solid rgb(0 0 0 / 35%);
+}
+
+html[data-theme="dark"] .theme-toggle__swatches span {
+  border-color: rgb(255 255 255 / 35%);
+}
+
+.theme-toggle__swatches span:first-child {
+  background: #0a0a0a;
+}
+
+.theme-toggle__swatches span:last-child {
+  background: #fafafa;
+}
+
+.work-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}

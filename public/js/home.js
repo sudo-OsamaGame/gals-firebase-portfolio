@@ -1,4 +1,5 @@
 import { app } from "./firebase-init.js";
+import { initThemeToggle } from "./theme-toggle.js";
 
 void app;
 
@@ -123,6 +124,8 @@ function attachDrag(el, spec, stage) {
 }
 
 async function main() {
+  initThemeToggle();
+
   const res = await fetch("./js/projects.json", { cache: "no-store" });
   if (!res.ok) throw new Error("projects.json");
   const data = await res.json();

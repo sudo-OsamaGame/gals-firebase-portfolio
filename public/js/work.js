@@ -1,4 +1,5 @@
 import { app } from "./firebase-init.js";
+import { initThemeToggle } from "./theme-toggle.js";
 
 void app;
 
@@ -7,6 +8,8 @@ function params() {
 }
 
 async function main() {
+  initThemeToggle();
+
   const id = params().get("id");
   const res = await fetch("./js/projects.json", { cache: "no-store" });
   if (!res.ok) throw new Error("projects.json");

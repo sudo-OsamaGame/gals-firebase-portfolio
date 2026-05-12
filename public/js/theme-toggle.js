@@ -1,0 +1,56 @@
+export const THEME_KEY = "gals-portfolio-theme";
+
+export function readStoredTheme() {
+  try {
+    const t = localStorage.getItem(THEME_KEY);
+    if (t === "dark" || t === "light") return t;
+  } catch {
+    /* ignore */
+  }
+  return null;
+}
+
+/**
+ * @param {"light" | "dark"} theme
+ */
+export function applyTheme(theme) {
+  const t = theme === "dark" ? "dark" : "light";
+  document.documentElement.setAttribute("data-theme", t);
+  try {
+    localStorage.setItem(THEME_KEY, t);
+  } catch {
+    /* ignore */
+  }
+
+  document.querySelectorAll("[data-theme-toggle]").forEach((el) => {
+    if (!(el instanceof HTMLElement)) return;
+    const dark = t === "dark";
+    el.setAttribute("aria-pressed", String(dark));
+    el.setAttribute(
+      "aria-label",
+      dark ? "Switch to white screen" : "Switch to black screen",
+    );
+    const label = el.querySelector(".theme-toggle__label");
+    if (label) {
+      label.textContent = dark ? "White screen" : "Black screen";
+    }
+  });
+}
+
+export function initThemeToggle() {
+  const stored = readStoredTheme();
+  const initial =
+    stored ??
+    (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  applyTheme(initial);
+
+  document.querySelectorAll("[data-theme-toggle]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const cur =
+        document.documentElement.getAttribute("data-theme") === "dark"
+          ? "dark"
+          : "light";
+      applyTheme(cur === "dark" ? "light" : "dark");
+    });
+  });
+}

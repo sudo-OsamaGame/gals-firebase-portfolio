@@ -56,6 +56,18 @@ test.describe("Live site — user-facing flows", () => {
     await expect(shape).toBeVisible();
   });
 
+  test("theme toggle switches html data-theme", async ({ page }) => {
+    await page.goto("/");
+    const html = page.locator("html");
+    const before = await html.getAttribute("data-theme");
+    await page.locator("[data-theme-toggle]").first().click();
+    const after = await html.getAttribute("data-theme");
+    expect(after).not.toBe(before);
+    await page.locator("[data-theme-toggle]").first().click();
+    const restored = await html.getAttribute("data-theme");
+    expect(restored).toBe(before);
+  });
+
   test("keyboard: focus + Enter opens project", async ({ page }) => {
     await page.goto("/");
     await page.locator('[data-project-id="exponential"]').focus();

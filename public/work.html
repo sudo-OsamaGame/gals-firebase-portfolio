@@ -6,6 +6,17 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <title>Project — Gal Nakel</title>
+    <script>
+      (function () {
+        try {
+          var k = "gals-portfolio-theme";
+          var t = localStorage.getItem(k);
+          if (t === "dark" || t === "light")
+            document.documentElement.setAttribute("data-theme", t);
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="./css/theme.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -13,14 +24,6 @@
       rel="stylesheet"
     />
     <style>
-      :root {
-        --bg: #ffffff;
-        --ink: #111;
-        --muted: #4a4a4a;
-        --blue: #1b6cff;
-        --font-display: "Caveat", cursive;
-        --font-body: "DM Sans", system-ui, sans-serif;
-      }
       * {
         box-sizing: border-box;
       }
@@ -39,17 +42,13 @@
       }
       .back {
         display: inline-block;
-        margin-bottom: 1.25rem;
         text-decoration: none;
         font-weight: 600;
         font-size: 0.9rem;
-        color: var(--blue);
-        border: 2px solid var(--blue);
+        color: var(--work-blue);
+        border: 2px solid var(--work-blue);
         border-radius: 999px;
         padding: 0.4rem 1rem;
-      }
-      .back:hover {
-        background: color-mix(in srgb, var(--blue) 8%, white);
       }
       h1 {
         font-size: clamp(1.75rem, 4vw, 2.25rem);
@@ -60,7 +59,7 @@
         margin: 0 0 1.25rem;
         border-radius: 14px;
         overflow: hidden;
-        background: #f0f0f0;
+        background: var(--work-media-bg);
       }
       #work-media img,
       #work-media video {
@@ -80,7 +79,21 @@
   </head>
   <body>
     <div class="wrap">
-      <a class="back" href="./index.html">← Back home</a>
+      <div class="work-top">
+        <a class="back" href="./index.html">← Back home</a>
+        <button
+          type="button"
+          class="theme-toggle"
+          data-theme-toggle
+          aria-pressed="false"
+          aria-label="Switch to black screen"
+        >
+          <span class="theme-toggle__swatches" aria-hidden="true">
+            <span></span><span></span>
+          </span>
+          <span class="theme-toggle__label">Black screen</span>
+        </button>
+      </div>
       <article>
         <h1 id="work-title">Loading…</h1>
         <div id="work-media"></div>
