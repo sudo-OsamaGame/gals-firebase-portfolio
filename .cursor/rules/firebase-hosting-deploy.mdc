@@ -33,7 +33,7 @@ Use an **indicative** message so rollback and history are readable, for example:
 
 - `feat: add video tile for thesis reel`
 - `fix: correct lightbox focus trap on mobile`
-- `content: reorder works.json and update captions`
+- `content: reorder projects.json and update copy`
 - `chore: bump firebase-tools`
 - `style: tighten gallery grid spacing`
 

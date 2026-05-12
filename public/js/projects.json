@@ -1,0 +1,82 @@
+{
+  "site": {
+    "name": "Gal Nakel",
+    "footer": "Visual Communication student ✦ Shenkar College, Israel",
+    "heroLine1": "Welcome!",
+    "heroCheers": "(and cheers I guess)",
+    "heroLine2": "My name is",
+    "portraitSrc": "",
+    "portraitAlt": "Gal Nakel"
+  },
+  "homeDraggables": [
+    {
+      "id": "zormim",
+      "shape": "blob-blue",
+      "label": "ZORMIM\nHAYARKON",
+      "defaultPosition": { "leftPct": 42, "topPct": 8 }
+    },
+    {
+      "id": "smores",
+      "shape": "oval-green",
+      "label": "S'MORES",
+      "defaultPosition": { "leftPct": 72, "topPct": 6 }
+    },
+    {
+      "id": "cloud-nine",
+      "shape": "star-yellow",
+      "label": "CLOUD\nNINE",
+      "defaultPosition": { "leftPct": 8, "topPct": 58 }
+    },
+    {
+      "id": "exponential",
+      "shape": "diamond-orange",
+      "label": "EXPONENTIAL",
+      "defaultPosition": { "leftPct": 68, "topPct": 62 }
+    }
+  ],
+  "projects": {
+    "zormim": {
+      "title": "Zormim Hayarkon",
+      "body": [
+        "A visual communication piece exploring themes around the Yarkon. Replace this text with your process, concept, and outcomes.",
+        "Add a video by setting \"media.type\" to \"video\" and \"media.src\" to a file under /media/."
+      ],
+      "media": { "type": "image", "src": "/media/zormim-layarkon.png", "alt": "Zormim Hayarkon project" }
+    },
+    "smores": {
+      "title": "S'mores",
+      "body": [
+        "Describe the S'mores project here — idea, materials, and what you want visitors to notice first."
+      ],
+      "media": { "type": "image", "src": "/media/smores.png", "alt": "S'mores project" }
+    },
+    "cloud-nine": {
+      "title": "Cloud Nine",
+      "body": [
+        "Tell the story behind Cloud Nine: audience, format, and your role."
+      ],
+      "media": { "type": "image", "src": "/media/cloud-nine-art.png", "alt": "Cloud Nine project" }
+    },
+    "exponential": {
+      "title": "Exponential",
+      "body": [
+        "Use this space for Exponential — context, sketches, and final execution."
+      ],
+      "media": { "type": "image", "src": "/media/exponential.png", "alt": "Exponential project" }
+    },
+    "about-me": {
+      "title": "About me",
+      "body": [
+        "Introduce yourself: what you study, what you care about, and how to reach you if you want that public."
+      ],
+      "media": { "type": "image", "src": "/media/about-me.png", "alt": "About me" }
+    },
+    "side-quests": {
+      "title": "Side quests & fun stuff",
+      "body": [
+        "Smaller experiments, personal prompts, or play — anything that does not fit a single \"hero\" project."
+      ],
+      "media": { "type": "image", "src": "/media/side-quests.png", "alt": "Side quests" }
+    }
+  }
+}

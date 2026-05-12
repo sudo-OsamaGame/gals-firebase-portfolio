@@ -82,7 +82,7 @@ That runs `firebase deploy --only hosting`. When it finishes, the output shows y
 
 ## 6. After you change the site
 
-1. Edit files under **`public/`** (HTML, CSS, JS, images in `public/media/`, list in `public/js/works.json`).
+1. Edit files under **`public/`** (HTML, CSS, JS, images in `public/media/`, copy in `public/js/projects.json`).
 2. Run again:
 
 ```bash

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Project — Gal Nakel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;1,9..40,400&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #ffffff;
+        --ink: #111;
+        --muted: #4a4a4a;
+        --blue: #1b6cff;
+        --font-display: "Caveat", cursive;
+        --font-body: "DM Sans", system-ui, sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        min-height: 100dvh;
+        font-family: var(--font-body);
+        background: var(--bg);
+        color: var(--ink);
+        line-height: 1.55;
+      }
+      .wrap {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 1.25rem 1.25rem 2.5rem;
+      }
+      .back {
+        display: inline-block;
+        margin-bottom: 1.25rem;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.9rem;
+        color: var(--blue);
+        border: 2px solid var(--blue);
+        border-radius: 999px;
+        padding: 0.4rem 1rem;
+      }
+      .back:hover {
+        background: color-mix(in srgb, var(--blue) 8%, white);
+      }
+      h1 {
+        font-size: clamp(1.75rem, 4vw, 2.25rem);
+        margin: 0 0 1rem;
+        letter-spacing: -0.02em;
+      }
+      #work-media {
+        margin: 0 0 1.25rem;
+        border-radius: 14px;
+        overflow: hidden;
+        background: #f0f0f0;
+      }
+      #work-media img,
+      #work-media video {
+        width: 100%;
+        height: auto;
+        display: block;
+        vertical-align: middle;
+      }
+      #work-body p {
+        margin: 0 0 0.85rem;
+        color: var(--muted);
+      }
+      #work-body p:last-child {
+        margin-bottom: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <a class="back" href="./index.html">← Back home</a>
+      <article>
+        <h1 id="work-title">Loading…</h1>
+        <div id="work-media"></div>
+        <div id="work-body"></div>
+      </article>
+    </div>
+    <script type="module" src="./js/work.js"></script>
+  </body>
+</html>
