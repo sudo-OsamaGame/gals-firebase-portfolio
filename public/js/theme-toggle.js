@@ -1,5 +1,25 @@
 export const THEME_KEY = "gals-portfolio-theme";
 
+const BANNER_LIGHT = "/media/banner.png";
+const BANNER_DARK = "/media/banner-dark.png";
+
+/**
+ * @param {"light" | "dark"} theme
+ */
+function syncHeroBanner(theme) {
+  const el = document.querySelector(".hero-banner");
+  if (!(el instanceof HTMLImageElement)) return;
+  const light = el.dataset.bannerLight || BANNER_LIGHT;
+  const dark = el.dataset.bannerDark || BANNER_DARK;
+  const next = theme === "dark" ? dark : light;
+  try {
+    const abs = new URL(next, window.location.href).href;
+    if (el.src !== abs) el.src = next;
+  } catch {
+    el.src = next;
+  }
+}
+
 export function readStoredTheme() {
   try {
     const t = localStorage.getItem(THEME_KEY);
@@ -21,6 +41,8 @@ export function applyTheme(theme) {
   } catch {
     /* ignore */
   }
+
+  syncHeroBanner(t);
 
   document.querySelectorAll("[data-theme-toggle]").forEach((el) => {
     if (!(el instanceof HTMLElement)) return;

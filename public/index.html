@@ -232,14 +232,40 @@
       <h1 class="visually-hidden">Gal Nakel — portfolio</h1>
       <div class="hero-composition">
         <img
+          id="hero-banner"
           class="hero-banner"
           src="/media/banner.png"
+          data-banner-light="/media/banner.png"
+          data-banner-dark="/media/banner-dark.png"
           alt="Welcome — Gal Nakel, Visual Communication at Shenkar"
           width="1600"
           height="900"
           decoding="async"
           fetchpriority="high"
         />
+        <script>
+          (function () {
+            var img = document.getElementById("hero-banner");
+            if (!img) return;
+            var light = img.getAttribute("data-banner-light") || "/media/banner.png";
+            var dark = img.getAttribute("data-banner-dark") || "/media/banner-dark.png";
+            function pick() {
+              try {
+                var t = localStorage.getItem("gals-portfolio-theme");
+                if (t === "dark") return dark;
+                if (t === "light") return light;
+              } catch (e) {}
+              if (
+                window.matchMedia &&
+                window.matchMedia("(prefers-color-scheme: dark)").matches
+              )
+                return dark;
+              return light;
+            }
+            var src = pick();
+            if (src) img.src = src;
+          })();
+        </script>
       </div>
     </div>
 
