@@ -3,10 +3,10 @@ import { initThemeToggle } from "./theme-toggle.js";
 
 void app;
 
-const STORAGE_KEY = "gals-portfolio-shape-positions-v3";
+const STORAGE_KEY = "gals-portfolio-shape-positions-v4";
 const DRAG_THRESHOLD = 10;
 
-/** @typedef {{ id: string, shape: string, label: string, defaultPosition: { leftPct: number, topPct: number } }} HomeDraggable */
+/** @typedef {{ id: string, label: string, imageSrc: string, defaultPosition: { leftPct: number, topPct: number } }} HomeDraggable */
 
 function loadSavedPositions() {
   try {
@@ -150,19 +150,19 @@ async function main() {
   for (const spec of items) {
     const btn = document.createElement("button");
     btn.type = "button";
-    btn.className = `shape-btn shape-${spec.shape}`;
+    btn.className = "shape-btn shape--image";
     btn.dataset.projectId = spec.id;
-    btn.setAttribute("aria-label", `Open project: ${spec.label.replace(/\n/g, " ")}`);
+    const title = spec.label.replace(/\n/g, " ").trim();
+    btn.setAttribute("aria-label", `Open project: ${title}`);
     btn.setAttribute("tabindex", "0");
-    const inner = document.createElement("span");
-    inner.className = "shape-inner";
-    spec.label.split("\n").forEach((line) => {
-      const span = document.createElement("span");
-      span.className = "shape-line";
-      span.textContent = line;
-      inner.appendChild(span);
-    });
-    btn.appendChild(inner);
+
+    const img = document.createElement("img");
+    img.src = spec.imageSrc;
+    img.alt = "";
+    img.decoding = "async";
+    img.draggable = false;
+    btn.appendChild(img);
+
     stage.appendChild(btn);
     attachDrag(btn, spec, stage);
   }

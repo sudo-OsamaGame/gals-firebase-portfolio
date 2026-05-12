@@ -28,11 +28,11 @@ export function applyTheme(theme) {
     el.setAttribute("aria-pressed", String(dark));
     el.setAttribute(
       "aria-label",
-      dark ? "Switch to white screen" : "Switch to black screen",
+      dark ? "Switch to light mode" : "Switch to dark mode",
     );
     const label = el.querySelector(".theme-toggle__label");
     if (label) {
-      label.textContent = dark ? "White screen" : "Black screen";
+      label.textContent = dark ? "Light mode" : "Dark mode";
     }
   });
 }

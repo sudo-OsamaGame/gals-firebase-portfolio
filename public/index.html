@@ -124,96 +124,38 @@
         padding: 0;
         border: none;
         cursor: grab;
-        font-family: var(--font-shapes);
-        font-weight: 800;
-        font-stretch: condensed;
-        text-transform: uppercase;
-        letter-spacing: 0.02em;
-        color: #fff;
-        text-align: center;
-        line-height: 1.05;
         z-index: 8;
-        box-shadow: 0 5px 0 rgb(0 0 0 / 14%);
-        transition: filter 0.08s ease, box-shadow 0.08s ease;
+        transition: filter 0.08s ease;
       }
-      .shape-btn:hover {
-        filter: brightness(1.06);
+      .shape-btn.shape--image {
+        background: transparent;
+        box-shadow: none;
+        width: auto;
+        height: auto;
+        line-height: 0;
+      }
+      .shape-btn.shape--image img {
+        display: block;
+        width: auto;
+        height: auto;
+        max-width: min(260px, 46vw);
+        max-height: min(220px, 34dvh);
+        object-fit: contain;
+        user-select: none;
+        pointer-events: none;
+        filter: drop-shadow(0 5px 14px rgb(0 0 0 / 22%));
+      }
+      html[data-theme="dark"] .shape-btn.shape--image img {
+        filter: drop-shadow(0 6px 18px rgb(0 0 0 / 45%));
+      }
+      .shape-btn.shape--image:hover img {
+        filter: drop-shadow(0 7px 18px rgb(0 0 0 / 28%));
       }
       .shape-btn.is-dragging {
         cursor: grabbing;
         z-index: 40 !important;
-        box-shadow: 0 10px 22px rgb(0 0 0 / 20%);
-        outline: 2px solid rgb(0 0 0 / 12%);
-        outline-offset: 2px;
-      }
-      .shape-inner {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 0.08em;
-        width: 100%;
-        height: 100%;
-        padding: 0.45rem;
-        pointer-events: none;
-      }
-      .shape-line {
-        display: block;
-        font-size: clamp(0.58rem, 1.65vw, 0.82rem);
-      }
-      .shape-blob-blue {
-        width: min(200px, 40vw);
-        height: min(128px, 26vw);
-        border-radius: 58% 42% 62% 38% / 48% 55% 45% 52%;
-        background: var(--blue);
-      }
-      .shape-oval-green {
-        width: min(112px, 24vw);
-        height: min(196px, 42vw);
-        border-radius: 999px;
-        background: var(--green);
-        color: #0d1600;
-      }
-      .shape-oval-green .shape-inner {
-        transform: scaleX(0.92) scaleY(1.12);
-      }
-      .shape-oval-green .shape-line {
-        font-size: clamp(0.68rem, 2vw, 0.9rem);
-      }
-      .shape-star-yellow {
-        width: min(176px, 38vw);
-        height: min(176px, 38vw);
-        background: var(--yellow);
-        clip-path: polygon(
-          50% 0%,
-          61% 35%,
-          98% 35%,
-          68% 57%,
-          79% 100%,
-          50% 74%,
-          21% 100%,
-          32% 57%,
-          2% 35%,
-          39% 35%
-        );
-        color: #111;
-        box-shadow: none;
-        filter: drop-shadow(0 4px 0 rgb(0 0 0 / 12%));
-      }
-      .shape-star-yellow .shape-inner {
-        transform: rotate(-16deg);
-      }
-      .shape-diamond-orange {
-        width: min(148px, 32vw);
-        height: min(148px, 32vw);
-        background: var(--orange);
-        clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-      }
-      .shape-diamond-orange .shape-inner {
-        transform: rotate(-45deg);
-      }
-      .shape-diamond-orange .shape-line {
-        font-size: clamp(0.52rem, 1.45vw, 0.7rem);
+        outline: 2px solid color-mix(in srgb, var(--ink) 18%, transparent);
+        outline-offset: 3px;
       }
       .site-footer {
         text-align: center;
@@ -246,12 +188,12 @@
           class="theme-toggle"
           data-theme-toggle
           aria-pressed="false"
-          aria-label="Switch to black screen"
+          aria-label="Switch to dark mode"
         >
           <span class="theme-toggle__swatches" aria-hidden="true">
             <span></span><span></span>
           </span>
-          <span class="theme-toggle__label">Black screen</span>
+          <span class="theme-toggle__label">Dark mode</span>
         </button>
         <nav class="nav-pills" aria-label="Primary">
           <a href="./work.html?id=about-me">about me</a>

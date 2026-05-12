@@ -6,26 +6,26 @@
   "homeDraggables": [
     {
       "id": "zormim",
-      "shape": "blob-blue",
-      "label": "ZORMIM\nHAYARKON",
+      "label": "Zormim Hayarkon",
+      "imageSrc": "/media/zormim-layarkon.png",
       "defaultPosition": { "leftPct": 16, "topPct": 24 }
     },
     {
       "id": "smores",
-      "shape": "oval-green",
-      "label": "S'MORES",
+      "label": "S'mores",
+      "imageSrc": "/media/smores.png",
       "defaultPosition": { "leftPct": 86, "topPct": 22 }
     },
     {
       "id": "cloud-nine",
-      "shape": "star-yellow",
-      "label": "CLOUD\nNINE",
+      "label": "Cloud Nine",
+      "imageSrc": "/media/cloud-nine-icon.png",
       "defaultPosition": { "leftPct": 18, "topPct": 72 }
     },
     {
       "id": "exponential",
-      "shape": "diamond-orange",
-      "label": "EXPONENTIAL",
+      "label": "Exponential",
+      "imageSrc": "/media/exponential.png",
       "defaultPosition": { "leftPct": 84, "topPct": 76 }
     }
   ],

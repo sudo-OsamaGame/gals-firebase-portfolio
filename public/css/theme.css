@@ -23,19 +23,20 @@
 
 html[data-theme="dark"] {
   color-scheme: dark;
-  --bg: #050505;
-  --ink: #f4f4f4;
-  --muted: #a3a3a3;
-  --blue: #3d7dff;
-  --blue-nav: #9ec0ff;
-  --green: #b4ff3a;
+  /* Soft dark UI — not pure black */
+  --bg: #1a1b1f;
+  --ink: #f2f2f4;
+  --muted: #a8a8ae;
+  --blue: #4d84ff;
+  --blue-nav: #b3cfff;
+  --green: #b8ff4a;
   --yellow: #fff59a;
   --orange: #ffcc55;
-  --pill-border: #9ec0ff;
-  --work-media-bg: #141414;
-  --work-blue: #7eb0ff;
-  --theme-toggle-bg: #1e1e1e;
-  --theme-toggle-border: #e8e8e8;
+  --pill-border: #b3cfff;
+  --work-media-bg: #24252b;
+  --work-blue: #8eb8ff;
+  --theme-toggle-bg: #2a2b32;
+  --theme-toggle-border: #d8d8e0;
 }
 
 html[data-theme="dark"] .nav-pills a:hover {
