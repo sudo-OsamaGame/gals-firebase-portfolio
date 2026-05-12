@@ -144,18 +144,39 @@
         user-select: none;
         pointer-events: none;
         filter: drop-shadow(0 5px 14px rgb(0 0 0 / 22%));
+        transition: filter 0.28s ease;
       }
       html[data-theme="dark"] .shape-btn.shape--image img {
-        filter: drop-shadow(0 6px 18px rgb(0 0 0 / 45%));
+        filter:
+          drop-shadow(0 0 10px rgb(130 200 255 / 0.55))
+          drop-shadow(0 0 22px rgb(100 175 255 / 0.42))
+          drop-shadow(0 0 38px rgb(90 150 255 / 0.28));
       }
       .shape-btn.shape--image:hover img {
         filter: drop-shadow(0 7px 18px rgb(0 0 0 / 28%));
+      }
+      html[data-theme="dark"] .shape-btn.shape--image:hover img {
+        filter:
+          drop-shadow(0 0 14px rgb(160 220 255 / 0.7))
+          drop-shadow(0 0 28px rgb(120 195 255 / 0.5))
+          drop-shadow(0 0 48px rgb(100 170 255 / 0.35));
       }
       .shape-btn.is-dragging {
         cursor: grabbing;
         z-index: 40 !important;
         outline: 2px solid color-mix(in srgb, var(--ink) 18%, transparent);
         outline-offset: 3px;
+      }
+      html[data-theme="dark"] .shape-btn.shape--image.is-dragging img {
+        filter:
+          drop-shadow(0 0 18px rgb(190 235 255 / 0.85))
+          drop-shadow(0 0 34px rgb(140 205 255 / 0.6))
+          drop-shadow(0 0 56px rgb(110 180 255 / 0.45));
+      }
+      html[data-theme="dark"] .shape-btn.is-dragging {
+        outline: 2px solid rgb(140 200 255 / 0.45);
+        outline-offset: 4px;
+        box-shadow: 0 0 36px rgb(100 170 255 / 0.3);
       }
       .site-footer {
         text-align: center;
