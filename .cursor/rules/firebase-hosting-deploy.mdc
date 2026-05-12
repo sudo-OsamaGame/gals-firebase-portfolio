@@ -70,6 +70,15 @@ git push origin main
 
 If push fails (**401**, auth, or network), tell the user to fix credentials (PAT, SSH, or `gh auth login`) and run `git push` themselves; do not drop the local commit.
 
+## 5. End every iteration reply with the live URL
+
+When a deploy succeeded in that turn, **close the message to the user** with the hosted link so they can open it in one click:
+
+- **[https://gals-portfolio.web.app](https://gals-portfolio.web.app)** (primary)
+- [https://gals-portfolio.firebaseapp.com](https://gals-portfolio.firebaseapp.com) (alternate)
+
+If deploy did not run, still include the URL when the **site content** changed and the previous deploy is assumed live—or say explicitly that they need to deploy to see changes.
+
 ---
 
 ## Scope reminders
