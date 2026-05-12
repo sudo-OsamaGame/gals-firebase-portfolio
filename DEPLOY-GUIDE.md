@@ -101,7 +101,29 @@ Then open the URL the emulator prints (often `http://127.0.0.1:5000`).
 
 ---
 
-## 8. Optional: deploy without a browser (CI or agents)
+## 8. Optional: automated browser checks (Playwright)
+
+After `npm install`, install the browser once:
+
+```bash
+npx playwright install chromium
+```
+
+Run tests (default URL is the live site):
+
+```bash
+npm run test:e2e
+```
+
+Against the local emulator:
+
+```bash
+PLAYWRIGHT_BASE_URL=http://127.0.0.1:5000 npm run test:e2e
+```
+
+---
+
+## 9. Optional: deploy without a browser (CI or agents)
 
 1. On a machine where you are already logged in:
 
@@ -113,7 +135,7 @@ Then open the URL the emulator prints (often `http://127.0.0.1:5000`).
 
 ---
 
-## 9. If Cursor’s agent cannot run `npm run deploy`
+## 10. If Cursor’s agent cannot run `npm run deploy`
 
 Some agent terminals do not inherit your Mac’s full `PATH`, so they may not see `node`. Fix it on the Mac side (Node in `/usr/local/bin` after the official installer, restart Cursor, or launch Cursor from a terminal where `node -v` works). Deploying from **your** terminal with the steps above always works once Node and login are set up.
 
@@ -127,3 +149,4 @@ Some agent terminals do not inherit your Mac’s full `PATH`, so they may not se
 | Log in            | `npx firebase-tools login` |
 | Deploy live       | `npm run deploy` |
 | Local preview     | `npm run serve` |
+| Browser E2E tests | `npm run test:e2e` |

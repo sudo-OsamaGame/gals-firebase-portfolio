@@ -32,7 +32,17 @@ After a successful deploy, **verify the hosted build yourself** before committin
 
 Use the **WebFetch** tool (or `curl` in the terminal) for these checks. If any check fails, **fix, redeploy, and re-run QA** before the git commit. Summarize pass/fail briefly for the user.
 
-**Limits:** this does not validate drag-and-drop feel, fonts, or pixel layout; call out that visual/interaction QA is still for the browser.
+5. **Playwright (navigate like a user):** from the project root, with Node on `PATH`:
+
+   ```bash
+   npm install
+   npx playwright install chromium
+   npm run test:e2e
+   ```
+
+   Default base URL is `https://gals-portfolio.web.app`. Override with **`PLAYWRIGHT_BASE_URL`** (e.g. local Hosting emulator).
+
+**Limits:** fetch/curl checks do not validate drag feel, fonts, or pixel layout; Playwright covers scripted flows but not subjective design. **You** should still spot-check in Chrome/Safari when the iteration touches UI.
 
 ## 3. Commit (only if there are changes)
 
