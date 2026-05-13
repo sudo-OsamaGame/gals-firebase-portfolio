@@ -110,9 +110,34 @@
     "side-quests": {
       "title": "Side quests & fun stuff",
       "body": [
-        "Smaller experiments, personal prompts, or play — anything that does not fit a single \"hero\" project."
+        "Smaller experiments, prompts, and play — the bits that do not fit a single hero project. Drag the tiles around; hover to peek. Tap or click without dragging to open a still full screen, or to watch a clip with sound."
       ],
-      "media": { "type": "image", "src": "/media/side-quests.png", "alt": "Side quests" }
+      "playground": {
+        "storageKey": "gals-portfolio-side-quests-positions-v1",
+        "items": [
+          {
+            "id": "sq-world-best-boss",
+            "label": "World's best boss",
+            "kind": "image",
+            "src": "/media/side-quests-playground/worldbestboss.png",
+            "defaultPosition": { "leftPct": 22, "topPct": 32 }
+          },
+          {
+            "id": "sq-invitation",
+            "label": "Invitation",
+            "kind": "image",
+            "src": "/media/side-quests-playground/invitation.png",
+            "defaultPosition": { "leftPct": 78, "topPct": 30 }
+          },
+          {
+            "id": "sq-gal-nakel",
+            "label": "Gal Nakel — video",
+            "kind": "video",
+            "src": "/media/side-quests-playground/gal-nakel.mp4",
+            "defaultPosition": { "leftPct": 50, "topPct": 58 }
+          }
+        ]
+      }
     }
   }
 }

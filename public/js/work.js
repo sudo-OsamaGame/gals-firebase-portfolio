@@ -7,6 +7,274 @@ function params() {
   return new URLSearchParams(window.location.search);
 }
 
+const PLAYGROUND_DRAG_THRESHOLD = 10;
+
+/**
+ * @param {string} key
+ */
+function loadPlaygroundPositions(key) {
+  try {
+    const raw = localStorage.getItem(key);
+    if (!raw) return {};
+    const o = JSON.parse(raw);
+    return typeof o === "object" && o ? o : {};
+  } catch {
+    return {};
+  }
+}
+
+/**
+ * @param {string} key
+ * @param {string} id
+ * @param {number} leftPct
+ * @param {number} topPct
+ */
+function savePlaygroundPosition(key, id, leftPct, topPct) {
+  const all = loadPlaygroundPositions(key);
+  all[id] = { leftPct, topPct };
+  localStorage.setItem(key, JSON.stringify(all));
+}
+
+/**
+ * @param {HTMLElement} el
+ * @param {{ id: string, defaultPosition?: { leftPct?: number, topPct?: number } }} item
+ * @param {{ width: number, height: number }} stageSize
+ * @param {string} storageKey
+ */
+function placePlaygroundElement(el, item, stageSize, storageKey) {
+  const saved = loadPlaygroundPositions(storageKey)[item.id];
+  const leftPct = saved?.leftPct ?? item.defaultPosition?.leftPct ?? 50;
+  const topPct = saved?.topPct ?? item.defaultPosition?.topPct ?? 50;
+  const w = el.offsetWidth || 120;
+  const h = el.offsetHeight || 120;
+  const left = (leftPct / 100) * stageSize.width - w / 2;
+  const top = (topPct / 100) * stageSize.height - h / 2;
+  el.style.left = `${Math.round(Math.max(0, Math.min(stageSize.width - w, left)))}px`;
+  el.style.top = `${Math.round(Math.max(0, Math.min(stageSize.height - h, top)))}px`;
+}
+
+/**
+ * @param {HTMLElement} el
+ * @param {{ id: string, defaultPosition?: { leftPct?: number, topPct?: number } }} item
+ * @param {HTMLElement} stage
+ * @param {string} storageKey
+ * @param {() => void} onTap
+ */
+function attachPlaygroundDrag(el, item, stage, storageKey, onTap) {
+  let startX = 0;
+  let startY = 0;
+  let originLeft = 0;
+  let originTop = 0;
+  let dragging = false;
+  let moved = false;
+
+  const onPointerDown = (e) => {
+    if (e.button !== undefined && e.button !== 0) return;
+    el.setPointerCapture(e.pointerId);
+    dragging = true;
+    moved = false;
+    startX = e.clientX;
+    startY = e.clientY;
+    originLeft = el.offsetLeft;
+    originTop = el.offsetTop;
+    el.classList.add("is-dragging");
+    el.style.zIndex = "30";
+  };
+
+  const onPointerMove = (e) => {
+    if (!dragging) return;
+    const dx = e.clientX - startX;
+    const dy = e.clientY - startY;
+    if (Math.hypot(dx, dy) > PLAYGROUND_DRAG_THRESHOLD) moved = true;
+
+    const rect = stage.getBoundingClientRect();
+    const w = el.offsetWidth;
+    const h = el.offsetHeight;
+    const nextL = originLeft + dx;
+    const nextT = originTop + dy;
+    const maxL = rect.width - w;
+    const maxT = rect.height - h;
+    el.style.left = `${Math.round(Math.max(0, Math.min(maxL, nextL)))}px`;
+    el.style.top = `${Math.round(Math.max(0, Math.min(maxT, nextT)))}px`;
+  };
+
+  const finish = (e) => {
+    if (!dragging) return;
+    dragging = false;
+    try {
+      if (el.hasPointerCapture(e.pointerId)) {
+        el.releasePointerCapture(e.pointerId);
+      }
+    } catch {
+      /* ignore */
+    }
+    el.classList.remove("is-dragging");
+    el.style.zIndex = "";
+
+    const rect = stage.getBoundingClientRect();
+    const w = el.offsetWidth;
+    const h = el.offsetHeight;
+    const leftPct = ((el.offsetLeft + w / 2) / rect.width) * 100;
+    const topPct = ((el.offsetTop + h / 2) / rect.height) * 100;
+    savePlaygroundPosition(storageKey, item.id, leftPct, topPct);
+
+    if (!moved) onTap();
+  };
+
+  el.addEventListener("pointerdown", onPointerDown);
+  el.addEventListener("pointermove", onPointerMove);
+  el.addEventListener("pointerup", finish);
+  el.addEventListener("pointercancel", finish);
+
+  el.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      onTap();
+    }
+  });
+}
+
+/**
+ * @param {string} src
+ * @param {string} title
+ */
+function openVideoDialog(src, title) {
+  const dialog = document.createElement("dialog");
+  dialog.className = "work-video-dialog";
+  const vid = document.createElement("video");
+  vid.src = src;
+  vid.controls = true;
+  vid.playsInline = true;
+  vid.setAttribute("aria-label", title || "Video");
+  const bar = document.createElement("div");
+  bar.className = "work-video-dialog__bar";
+  const closeBtn = document.createElement("button");
+  closeBtn.type = "button";
+  closeBtn.className = "work-video-dialog__close";
+  closeBtn.textContent = "Close";
+  closeBtn.addEventListener("click", () => dialog.close());
+  bar.appendChild(closeBtn);
+  dialog.appendChild(vid);
+  dialog.appendChild(bar);
+  document.body.appendChild(dialog);
+  dialog.addEventListener("close", () => {
+    vid.pause();
+    vid.removeAttribute("src");
+    vid.load();
+    dialog.remove();
+  });
+  dialog.addEventListener("cancel", (ev) => {
+    ev.preventDefault();
+    dialog.close();
+  });
+  dialog.showModal();
+  queueMicrotask(() => closeBtn.focus());
+}
+
+/**
+ * @param {object} project
+ * @param {HTMLElement} bodyEl
+ * @param {HTMLElement} mediaEl
+ */
+function initSideQuestsPlayground(project, bodyEl, mediaEl) {
+  const pg = /** @type {{ items?: unknown[], storageKey?: string }} */ (
+    project.playground
+  );
+  const items = Array.isArray(pg?.items) ? pg.items : [];
+  const storageKey =
+    typeof pg?.storageKey === "string" && pg.storageKey
+      ? pg.storageKey
+      : "gals-portfolio-side-quests-positions-v1";
+
+  const stage = document.getElementById("side-quests-stage");
+  if (!stage) return;
+
+  mediaEl.replaceChildren();
+  mediaEl.hidden = true;
+
+  bodyEl.replaceChildren();
+  for (const para of project.body || []) {
+    const p = document.createElement("p");
+    p.textContent = para;
+    bodyEl.appendChild(p);
+  }
+
+  stage.replaceChildren();
+  stage.hidden = false;
+  stage.removeAttribute("aria-hidden");
+
+  const layout = () => {
+    const rect = stage.getBoundingClientRect();
+    const size = { width: rect.width, height: rect.height };
+    for (const raw of items) {
+      const item = /** @type {{ id: string, src?: string, label?: string, kind?: string, defaultPosition?: { leftPct?: number, topPct?: number } }} */ (
+        raw
+      );
+      if (!item?.id) continue;
+      const el = stage.querySelector(`[data-sq-id="${CSS.escape(item.id)}"]`);
+      if (el instanceof HTMLElement) {
+        placePlaygroundElement(el, item, size, storageKey);
+      }
+    }
+  };
+
+  for (const raw of items) {
+    const item = /** @type {{ id: string, src?: string, label?: string, kind?: string, defaultPosition?: { leftPct?: number, topPct?: number } }} */ (
+      raw
+    );
+    if (!item?.id || !item.src) continue;
+    const kind = item.kind === "video" ? "video" : "image";
+
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "sq-shape";
+    if (kind === "video") btn.classList.add("sq-shape--video");
+    btn.dataset.sqId = item.id;
+    const label = (item.label || item.id).replace(/\n/g, " ").trim();
+    btn.setAttribute("aria-label", `Side quest: ${label}`);
+    btn.setAttribute("tabindex", "0");
+
+    if (kind === "video") {
+      const vid = document.createElement("video");
+      vid.src = item.src;
+      vid.muted = true;
+      vid.playsInline = true;
+      vid.setAttribute("preload", "metadata");
+      vid.setAttribute("aria-hidden", "true");
+      const badge = document.createElement("span");
+      badge.className = "sq-shape__play-badge";
+      badge.textContent = "▶";
+      badge.setAttribute("aria-hidden", "true");
+      btn.appendChild(vid);
+      btn.appendChild(badge);
+    } else {
+      const img = document.createElement("img");
+      img.src = item.src;
+      img.alt = "";
+      img.decoding = "async";
+      img.setAttribute("aria-hidden", "true");
+      btn.appendChild(img);
+    }
+
+    stage.appendChild(btn);
+    attachPlaygroundDrag(btn, item, stage, storageKey, () => {
+      if (kind === "video") {
+        openVideoDialog(item.src, label);
+      } else {
+        openWorkLightbox([{ src: item.src, alt: label }], 0);
+      }
+    });
+  }
+
+  requestAnimationFrame(() => {
+    layout();
+    requestAnimationFrame(layout);
+  });
+  window.addEventListener("resize", () => {
+    requestAnimationFrame(layout);
+  });
+}
+
 /** @type {{ src: string; alt?: string }[]} */
 let lightboxSlides = [];
 let lightboxIndex = 0;
@@ -272,6 +540,18 @@ async function main() {
   }
 
   titleEl.textContent = project.title;
+  mediaEl.hidden = false;
+
+  if (
+    project.playground &&
+    typeof project.playground === "object" &&
+    Array.isArray(project.playground.items) &&
+    project.playground.items.length
+  ) {
+    initSideQuestsPlayground(project, bodyEl, mediaEl);
+    return;
+  }
+
   bodyEl.replaceChildren();
   const paragraphs = project.body || [];
   const bodySlots = bodyMediaSlotsByParagraph(project.bodyMedia);

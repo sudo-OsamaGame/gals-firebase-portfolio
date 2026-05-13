@@ -8,3 +8,6 @@ node_modules/
 test-results/
 playwright-report/
 playwright/.cache/
+
+# Large source video (add a compressed export to public/media if you want it on the site)
+works/side quests & fun stuff/GalNakel_IThinkYouShouldLeave_Intromaster.mov
