@@ -77,15 +77,170 @@
       }
       .work-body-gallery {
         margin: 0.35rem 0 1.1rem;
-        display: grid;
-        gap: 0.75rem;
-      }
-      .work-body-gallery img {
+        display: flex;
+        flex-direction: row;
+        gap: 0.35rem;
         width: 100%;
-        height: auto;
-        display: block;
-        border-radius: 12px;
+        align-items: stretch;
+      }
+      .work-body-gallery__thumb {
+        flex: 1 1 0;
+        min-width: 0;
+        margin: 0;
+        padding: 0;
+        border: none;
+        border-radius: 8px;
+        overflow: hidden;
+        cursor: zoom-in;
         background: var(--work-media-bg);
+        box-shadow: 0 0 0 1px rgba(127, 127, 127, 0.28);
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+        aspect-ratio: 9 / 18;
+        position: relative;
+      }
+      .work-body-gallery__thumb:hover {
+        transform: scale(1.02);
+        box-shadow: 0 0 0 2px var(--work-blue);
+      }
+      .work-body-gallery__thumb:focus-visible {
+        outline: 2px solid var(--work-blue);
+        outline-offset: 2px;
+      }
+      .work-body-gallery__thumb img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+        pointer-events: none;
+      }
+
+      .work-lightbox {
+        position: fixed;
+        inset: 0;
+        z-index: 10000;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .work-lightbox[hidden] {
+        display: none !important;
+      }
+      .work-lightbox__backdrop {
+        position: absolute;
+        inset: 0;
+        margin: 0;
+        padding: 0;
+        border: none;
+        cursor: zoom-out;
+        background: rgba(0, 0, 0, 0.9);
+      }
+      .work-lightbox__content {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100%;
+        max-height: 100%;
+        padding: 0.75rem;
+        padding-top: 2.75rem;
+        box-sizing: border-box;
+        pointer-events: none;
+      }
+      .work-lightbox__toolbar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+        padding: 0.5rem 0.6rem;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.65), transparent);
+        pointer-events: auto;
+      }
+      .work-lightbox__counter {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.92);
+        letter-spacing: 0.02em;
+      }
+      .work-lightbox__close {
+        margin-left: auto;
+      }
+      .work-lightbox__btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 2.5rem;
+        min-height: 2.5rem;
+        padding: 0 0.65rem;
+        border: 2px solid rgba(255, 255, 255, 0.5);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.12);
+        color: #fff;
+        font: inherit;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .work-lightbox__btn:hover {
+        background: rgba(255, 255, 255, 0.22);
+        border-color: rgba(255, 255, 255, 0.75);
+      }
+      .work-lightbox__btn:focus-visible {
+        outline: 2px solid #fff;
+        outline-offset: 2px;
+      }
+      .work-lightbox__btn:disabled {
+        opacity: 0.35;
+        cursor: not-allowed;
+      }
+      .work-lightbox__stage {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        max-width: min(96vw, 920px);
+        min-height: 0;
+        touch-action: pan-y;
+        pointer-events: none;
+      }
+      .work-lightbox__img {
+        max-width: 100%;
+        max-height: min(78dvh, 820px);
+        width: auto;
+        height: auto;
+        object-fit: contain;
+        border-radius: 10px;
+        user-select: none;
+        pointer-events: auto;
+        cursor: default;
+      }
+      .work-lightbox__nav {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        pointer-events: none;
+        padding: 0 0.25rem;
+      }
+      .work-lightbox__nav .work-lightbox__btn {
+        pointer-events: auto;
+        font-size: 1.35rem;
+        line-height: 1;
+      }
+      .work-lightbox__caption {
+        max-width: min(96vw, 560px);
+        margin-top: 0.65rem;
+        text-align: center;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.88);
+        line-height: 1.45;
       }
     </style>
   </head>
