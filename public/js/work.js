@@ -248,7 +248,11 @@ async function main() {
   }
 
   mediaEl.replaceChildren();
+  mediaEl.classList.remove("work-media--transparent");
   const m = project.media;
+  if (m?.transparentPanel) {
+    mediaEl.classList.add("work-media--transparent");
+  }
   if (m?.type === "video" && m.src) {
     const v = document.createElement("video");
     v.src = m.src;

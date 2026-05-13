@@ -51,7 +51,12 @@
           ]
         }
       ],
-      "media": { "type": "image", "src": "/media/zormim-logo.png", "alt": "Zormim Layarkon — logo" }
+      "media": {
+        "type": "image",
+        "src": "/media/zormim-logo.png",
+        "alt": "Zormim Layarkon — logo",
+        "transparentPanel": true
+      }
     },
     "smores": {
       "title": "S'mores",
