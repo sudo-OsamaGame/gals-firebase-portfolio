@@ -102,9 +102,7 @@
     },
     "about-me": {
       "title": "About me",
-      "body": [
-        "Introduce yourself: what you study, what you care about, and how to reach you if you want that public."
-      ],
+      "body": ["Page under construction!"],
       "media": { "type": "image", "src": "/media/about-me.png", "alt": "About me" }
     },
     "side-quests": {
