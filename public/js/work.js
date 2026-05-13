@@ -197,19 +197,54 @@ function appendBodyGallery(container, images) {
 }
 
 /**
- * Map paragraph index → images to show after that paragraph.
+ * @param {HTMLElement} container
+ * @param {{ src: string; alt?: string } | null | undefined} video
+ */
+function appendBodyVideo(container, video) {
+  if (!video?.src) return;
+  const wrap = document.createElement("div");
+  wrap.className = "work-body-video";
+  const v = document.createElement("video");
+  v.src = video.src;
+  v.controls = true;
+  v.playsInline = true;
+  v.setAttribute("aria-label", video.alt || "Project video");
+  wrap.appendChild(v);
+  container.appendChild(wrap);
+}
+
+/**
+ * Map paragraph index → optional gallery images and/or inline video after that paragraph.
  * @param {unknown} bodyMedia
  */
-function bodyMediaAfterMap(bodyMedia) {
-  /** @type {Map<number, { src: string; alt?: string }[]>} */
+function bodyMediaSlotsByParagraph(bodyMedia) {
+  /** @type {Map<number, { images?: { src: string; alt?: string }[]; video?: { src: string; alt?: string } }>} */
   const map = new Map();
   if (!Array.isArray(bodyMedia)) return map;
   for (const block of bodyMedia) {
     if (!block || typeof block !== "object") continue;
     const idx = /** @type {{ afterParagraphIndex?: unknown }} */ (block).afterParagraphIndex;
+    if (typeof idx !== "number") continue;
+    let slot = map.get(idx);
+    if (!slot) {
+      slot = {};
+      map.set(idx, slot);
+    }
     const images = /** @type {{ images?: unknown }} */ (block).images;
-    if (typeof idx !== "number" || !Array.isArray(images)) continue;
-    map.set(idx, /** @type {{ src: string; alt?: string }[]} */ (images));
+    if (Array.isArray(images) && images.length) {
+      slot.images = /** @type {{ src: string; alt?: string }[]} */ (images);
+    }
+    const vid = /** @type {{ video?: unknown }} */ (block).video;
+    if (vid && typeof vid === "object" && vid !== null && "src" in vid) {
+      const src = /** @type {{ src?: unknown }} */ (vid).src;
+      if (typeof src === "string" && src) {
+        const alt = /** @type {{ alt?: unknown }} */ (vid).alt;
+        slot.video = {
+          src,
+          alt: typeof alt === "string" ? alt : undefined,
+        };
+      }
+    }
   }
   return map;
 }
@@ -239,12 +274,14 @@ async function main() {
   titleEl.textContent = project.title;
   bodyEl.replaceChildren();
   const paragraphs = project.body || [];
-  const mediaAfter = bodyMediaAfterMap(project.bodyMedia);
+  const bodySlots = bodyMediaSlotsByParagraph(project.bodyMedia);
   for (let i = 0; i < paragraphs.length; i++) {
     const p = document.createElement("p");
     p.textContent = paragraphs[i];
     bodyEl.appendChild(p);
-    appendBodyGallery(bodyEl, mediaAfter.get(i));
+    const slot = bodySlots.get(i);
+    appendBodyGallery(bodyEl, slot?.images || []);
+    appendBodyVideo(bodyEl, slot?.video);
   }
 
   mediaEl.replaceChildren();

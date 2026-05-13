@@ -66,6 +66,15 @@
         "In addition to discovering new locations, users can collaboratively create and edit travel maps with friends in real time, communicate through an integrated group chat, and save or recreate routes published by other users. The app encourages exploration through community interaction, making outdoor experiences feel less intimidating and more socially driven.",
         "Created in collaboration with Tal Shpolansky as part of the Interactive course at Shenkar College (2022), instructed by Hagai Itach."
       ],
+      "bodyMedia": [
+        {
+          "afterParagraphIndex": 0,
+          "video": {
+            "src": "/media/smores-vid.mp4",
+            "alt": "S'mores app video walkthrough"
+          }
+        }
+      ],
       "media": { "type": "image", "src": "/media/smores.png", "alt": "S'mores project" }
     },
     "cloud-nine": {
