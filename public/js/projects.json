@@ -6,7 +6,7 @@
   "homeDraggables": [
     {
       "id": "zormim",
-      "label": "Zormim Hayarkon",
+      "label": "Zormim Layarkon",
       "imageSrc": "/media/zormim-logo.png",
       "defaultPosition": { "leftPct": 16, "topPct": 24 }
     },
@@ -31,7 +31,7 @@
   ],
   "projects": {
     "zormim": {
-      "title": "Zormim Hayarkon",
+      "title": "Zormim Layarkon",
       "body": [
         "Rebranding and social experience concept for Yarkon Park. \"Zormim Layarkon\" is a conceptual rebranding project for Yarkon Park, centered around the idea of the park as a restorative environment within the urban landscape of Tel Aviv. The project explores how design and digital interaction can encourage people to reconnect with nature, community, and slower experiences within the city.",
         "The project combines branding, UX/UI design, and environmental thinking through a social mobile app designed specifically for the visitors of the park, and the people who live nearby. The app acts as a community-driven platform where users can create and join activities taking place throughout the park, from birdwatching sessions and meditation gatherings to sports meetups and creative workshops. Existing businesses and attractions within the park can also promote events and offer special benefits for app users.",
@@ -51,7 +51,7 @@
           ]
         }
       ],
-      "media": { "type": "image", "src": "/media/zormim-layarkon.png", "alt": "Zormim Hayarkon project" }
+      "media": { "type": "image", "src": "/media/zormim-logo.png", "alt": "Zormim Layarkon — logo" }
     },
     "smores": {
       "title": "S'mores",
