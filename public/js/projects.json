@@ -39,6 +39,18 @@
         "As part of the project, I also designed a branded picnic kit available for rent throughout the park, including blankets, cups, hats, and additional accessories intended to encourage longer, more social stays outdoors. Designated \"Chill Points\" were placed around quieter areas of the park, allowing users to activate guided meditations and calming experiences directly through the app.",
         "The project was created as part of the course Design Language: Place at Shenkar College under the instruction of Efrat Nir."
       ],
+      "bodyMedia": [
+        {
+          "afterParagraphIndex": 0,
+          "images": [
+            { "src": "/media/zormim-app/iphone-1.png", "alt": "Zormim mobile app — screen 1" },
+            { "src": "/media/zormim-app/iphone-2.png", "alt": "Zormim mobile app — screen 2" },
+            { "src": "/media/zormim-app/iphone-3.png", "alt": "Zormim mobile app — screen 3" },
+            { "src": "/media/zormim-app/iphone-4.png", "alt": "Zormim mobile app — screen 4" },
+            { "src": "/media/zormim-app/iphone-5.png", "alt": "Zormim mobile app — screen 5" }
+          ]
+        }
+      ],
       "media": { "type": "image", "src": "/media/zormim-layarkon.png", "alt": "Zormim Hayarkon project" }
     },
     "smores": {

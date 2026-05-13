@@ -7,6 +7,46 @@ function params() {
   return new URLSearchParams(window.location.search);
 }
 
+/**
+ * @param {HTMLElement} container
+ * @param {{ src: string; alt?: string }[]} images
+ */
+function appendBodyGallery(container, images) {
+  if (!images?.length) return;
+  const wrap = document.createElement("div");
+  wrap.className = "work-body-gallery";
+  wrap.setAttribute("role", "group");
+  wrap.setAttribute("aria-label", "Project imagery");
+  for (const item of images) {
+    if (!item?.src) continue;
+    const img = document.createElement("img");
+    img.src = item.src;
+    img.alt = item.alt || "";
+    img.loading = "lazy";
+    img.decoding = "async";
+    wrap.appendChild(img);
+  }
+  if (wrap.childElementCount) container.appendChild(wrap);
+}
+
+/**
+ * Map paragraph index → images to show after that paragraph.
+ * @param {unknown} bodyMedia
+ */
+function bodyMediaAfterMap(bodyMedia) {
+  /** @type {Map<number, { src: string; alt?: string }[]>} */
+  const map = new Map();
+  if (!Array.isArray(bodyMedia)) return map;
+  for (const block of bodyMedia) {
+    if (!block || typeof block !== "object") continue;
+    const idx = /** @type {{ afterParagraphIndex?: unknown }} */ (block).afterParagraphIndex;
+    const images = /** @type {{ images?: unknown }} */ (block).images;
+    if (typeof idx !== "number" || !Array.isArray(images)) continue;
+    map.set(idx, /** @type {{ src: string; alt?: string }[]} */ (images));
+  }
+  return map;
+}
+
 async function main() {
   initThemeToggle();
 
@@ -31,10 +71,13 @@ async function main() {
 
   titleEl.textContent = project.title;
   bodyEl.replaceChildren();
-  for (const para of project.body || []) {
+  const paragraphs = project.body || [];
+  const mediaAfter = bodyMediaAfterMap(project.bodyMedia);
+  for (let i = 0; i < paragraphs.length; i++) {
     const p = document.createElement("p");
-    p.textContent = para;
+    p.textContent = paragraphs[i];
     bodyEl.appendChild(p);
+    appendBodyGallery(bodyEl, mediaAfter.get(i));
   }
 
   mediaEl.replaceChildren();
