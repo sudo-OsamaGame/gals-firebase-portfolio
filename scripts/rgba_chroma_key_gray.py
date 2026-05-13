@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Remove solid light-gray card background from a PNG via edge-connected flood fill."""
+"""Remove solid outer background from a PNG via edge-connected flood fill.
+
+Default mode removes a light gray card (e.g. Zormim sticker).
+Use ``--dark`` for a near-black field (e.g. Exponential logo on black).
+"""
 from __future__ import annotations
 
 import sys
@@ -16,10 +20,15 @@ def saturation(rgb: tuple[int, int, int]) -> int:
 
 
 def main() -> int:
-    if len(sys.argv) < 2:
-        print("usage: rgba_chroma_key_gray.py <image.png>", file=sys.stderr)
+    argv = sys.argv[1:]
+    if not argv:
+        print(
+            "usage: rgba_chroma_key_gray.py <image.png> [--dark]",
+            file=sys.stderr,
+        )
         return 2
-    path = sys.argv[1]
+    path = argv[0]
+    dark_mode = len(argv) > 1 and argv[1] in ("--dark", "dark")
     try:
         from PIL import Image
     except ImportError:
@@ -38,26 +47,50 @@ def main() -> int:
         edge_samples.append(px[0, y][:3])
         edge_samples.append(px[w - 1, y][:3])
 
-    def looks_like_gray_card(c: tuple[int, int, int]) -> bool:
-        r, g, b = c
-        if max(r, g, b) < 120:
-            return False
-        if saturation(c) > 34:
-            return False
-        return True
+    if dark_mode:
 
-    grays = [c for c in edge_samples if looks_like_gray_card(c)]
-    if not grays:
-        grays = edge_samples[:8]
+        def looks_like_dark_field(c: tuple[int, int, int]) -> bool:
+            r, g, b = c
+            if max(r, g, b) > 72:
+                return False
+            if saturation(c) > 52:
+                return False
+            return True
 
-    ref = (
-        sum(c[0] for c in grays) // len(grays),
-        sum(c[1] for c in grays) // len(grays),
-        sum(c[2] for c in grays) // len(grays),
-    )
+        seeds = [c for c in edge_samples if looks_like_dark_field(c)]
+        if not seeds:
+            seeds = [(0, 0, 0)]
 
-    tol = 52
-    sat_max = 40
+        ref = (
+            sum(c[0] for c in seeds) // len(seeds),
+            sum(c[1] for c in seeds) // len(seeds),
+            sum(c[2] for c in seeds) // len(seeds),
+        )
+
+        tol = 44
+        sat_max = 55
+    else:
+
+        def looks_like_gray_card(c: tuple[int, int, int]) -> bool:
+            r, g, b = c
+            if max(r, g, b) < 120:
+                return False
+            if saturation(c) > 34:
+                return False
+            return True
+
+        grays = [c for c in edge_samples if looks_like_gray_card(c)]
+        if not grays:
+            grays = edge_samples[:8]
+
+        ref = (
+            sum(c[0] for c in grays) // len(grays),
+            sum(c[1] for c in grays) // len(grays),
+            sum(c[2] for c in grays) // len(grays),
+        )
+
+        tol = 52
+        sat_max = 40
     visited = [[False] * w for _ in range(h)]
     q: deque[tuple[int, int]] = deque()
 
