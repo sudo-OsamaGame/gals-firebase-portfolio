@@ -33,8 +33,11 @@
     "zormim": {
       "title": "Zormim Hayarkon",
       "body": [
-        "A visual communication piece exploring themes around the Yarkon. Replace this text with your process, concept, and outcomes.",
-        "Add a video by setting \"media.type\" to \"video\" and \"media.src\" to a file under /media/."
+        "Rebranding and social experience concept for Yarkon Park. \"Zormim Layarkon\" is a conceptual rebranding project for Yarkon Park, centered around the idea of the park as a restorative environment within the urban landscape of Tel Aviv. The project explores how design and digital interaction can encourage people to reconnect with nature, community, and slower experiences within the city.",
+        "The project combines branding, UX/UI design, and environmental thinking through a social mobile app designed specifically for the visitors of the park, and the people who live nearby. The app acts as a community-driven platform where users can create and join activities taking place throughout the park, from birdwatching sessions and meditation gatherings to sports meetups and creative workshops. Existing businesses and attractions within the park can also promote events and offer special benefits for app users.",
+        "The visual identity is inspired by the hidden ecosystem of the Yarkon and the animals that inhabit it, many of which visitors are not aware of. Illustrated animals appear throughout the branding system, app experience, and environmental signage, helping visitors feel more connected to the park's natural environment.",
+        "As part of the project, I also designed a branded picnic kit available for rent throughout the park, including blankets, cups, hats, and additional accessories intended to encourage longer, more social stays outdoors. Designated \"Chill Points\" were placed around quieter areas of the park, allowing users to activate guided meditations and calming experiences directly through the app.",
+        "The project was created as part of the course Design Language: Place at Shenkar College under the instruction of Efrat Nir."
       ],
       "media": { "type": "image", "src": "/media/zormim-layarkon.png", "alt": "Zormim Hayarkon project" }
     },
