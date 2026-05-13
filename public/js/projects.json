@@ -61,7 +61,10 @@
     "smores": {
       "title": "S'mores",
       "body": [
-        "Describe the S'mores project here — idea, materials, and what you want visitors to notice first."
+        "S'mores is a travel-planning app designed for people who want to explore nature and hiking in Israel, even if they have little to no experience with the outdoors.",
+        "The app was created to make hiking feel more approachable, social, and customizable for a younger generation of travelers. Users can discover popular destinations across the country, explore routes based on personal preferences, and learn about places through content shared by other travelers. Filters allow users to search trips by region, difficulty level, hiking distance, and trip duration, helping them build experiences that feel accessible rather than overwhelming.",
+        "In addition to discovering new locations, users can collaboratively create and edit travel maps with friends in real time, communicate through an integrated group chat, and save or recreate routes published by other users. The app encourages exploration through community interaction, making outdoor experiences feel less intimidating and more socially driven.",
+        "Created in collaboration with Tal Shpolansky as part of the Interactive course at Shenkar College (2022), instructed by Hagai Itach."
       ],
       "media": { "type": "image", "src": "/media/smores.png", "alt": "S'mores project" }
     },
