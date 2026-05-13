@@ -81,12 +81,7 @@
         "Final visuals and motion-based typographic compositions were created using TouchDesigner, allowing the project's aesthetic to emerge through generative processes that directly support the concept itself. As part of the exhibition experience, visitors could interact with the pavilion's animated logo through body tracking technology (MediaPipe), using finger movement to control the logo's color spectrum in real time.",
         "Created as part of the Multi-Platform Design course at Shenkar College, instructed by Nadav Barkan."
       ],
-      "media": {
-        "type": "image",
-        "src": "/media/exponential.png",
-        "alt": "Exponential — logo",
-        "transparentPanel": true
-      }
+      "media": { "type": "image", "src": "/media/exponential.png", "alt": "Exponential project" }
     },
     "about-me": {
       "title": "About me",
