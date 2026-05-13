@@ -48,7 +48,8 @@
     "cloud-nine": {
       "title": "Cloud Nine",
       "body": [
-        "Tell the story behind Cloud Nine: audience, format, and your role."
+        "Cloud Nine is a fictional vitamin company designed for young adults who are navigating life on their own for the first time. Often struggling with unhealthy eating habits and a lack of structured routines, these individuals are in need of a personalized health approach. Through a simple process, customers send in their blood tests, and medical professionals recommend specific vitamins tailored to their needs.",
+        "Along with the vitamins, customers receive detailed instructions on when, how, and with what to take them. The product packaging features cute cloud creatures that represent the benefits of each vitamin, accompanied by small stickers with fun facts about each nutrient, making it both informative and engaging. This concept was created as part of a packaging course with our instructor, Sari Gabbai."
       ],
       "media": { "type": "image", "src": "/media/cloud-nine-art.png", "alt": "Cloud Nine project" }
     },
