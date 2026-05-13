@@ -7,25 +7,25 @@
     {
       "id": "zormim",
       "label": "Zormim Layarkon",
-      "imageSrc": "/media/zormim-logo.png",
+      "imageSrc": "/media/home-icon-zormim.png",
       "defaultPosition": { "leftPct": 16, "topPct": 24 }
     },
     {
       "id": "smores",
       "label": "S'mores",
-      "imageSrc": "/media/smores.png",
+      "imageSrc": "/media/home-icon-smores.png",
       "defaultPosition": { "leftPct": 86, "topPct": 22 }
     },
     {
       "id": "cloud-nine",
       "label": "Cloud Nine",
-      "imageSrc": "/media/cloud-nine-icon.png",
+      "imageSrc": "/media/home-icon-cloud-nine.png",
       "defaultPosition": { "leftPct": 18, "topPct": 72 }
     },
     {
       "id": "exponential",
       "label": "Exponential",
-      "imageSrc": "/media/exponential.png",
+      "imageSrc": "/media/home-icon-exponential.png",
       "defaultPosition": { "leftPct": 84, "topPct": 76 }
     }
   ],
