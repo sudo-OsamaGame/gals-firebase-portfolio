@@ -76,7 +76,7 @@
           }
         }
       ],
-      "media": { "type": "image", "src": "/media/smores.png", "alt": "S'mores project" }
+      "media": { "type": "image", "src": "/media/smores-logo.png", "alt": "S'mores — logo" }
     },
     "cloud-nine": {
       "title": "Cloud Nine",
