@@ -64,12 +64,24 @@
       #work-media.work-media--transparent {
         background: transparent;
       }
+      #work-media.work-media--scaled {
+        display: flex;
+        justify-content: center;
+        overflow: visible;
+        background: transparent;
+      }
       #work-media img,
       #work-media video {
         width: 100%;
         height: auto;
         display: block;
         vertical-align: middle;
+      }
+      #work-media.work-media--scaled img {
+        width: var(--work-hero-scale, 100%);
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
       }
       #work-body p {
         margin: 0 0 0.85rem;

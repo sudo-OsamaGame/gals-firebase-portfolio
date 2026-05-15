@@ -584,10 +584,20 @@ async function main() {
   }
 
   mediaEl.replaceChildren();
-  mediaEl.classList.remove("work-media--transparent");
+  mediaEl.classList.remove("work-media--transparent", "work-media--scaled");
+  mediaEl.style.removeProperty("--work-hero-scale");
   const m = project.media;
   if (m?.transparentPanel) {
     mediaEl.classList.add("work-media--transparent");
+  }
+  const heroScale =
+    typeof m?.scale === "number" && m.scale > 0 && m.scale <= 1 ? m.scale : null;
+  if (heroScale !== null) {
+    mediaEl.classList.add("work-media--scaled");
+    mediaEl.style.setProperty("--work-hero-scale", `${heroScale * 100}%`);
+    if (!m?.transparentPanel) {
+      mediaEl.classList.add("work-media--transparent");
+    }
   }
   if (m?.type === "video" && m.src) {
     const v = document.createElement("video");
