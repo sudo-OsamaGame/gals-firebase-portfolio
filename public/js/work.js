@@ -440,13 +440,17 @@ function closeWorkLightbox() {
 /**
  * @param {HTMLElement} container
  * @param {{ src: string; alt?: string }[]} images
+ * @param {"phone" | "landscape"} [layout]
  */
-function appendBodyGallery(container, images) {
+function appendBodyGallery(container, images, layout = "phone") {
   if (!images?.length) return;
   const list = images.filter((item) => item?.src);
   if (!list.length) return;
   const wrap = document.createElement("div");
   wrap.className = "work-body-gallery";
+  if (layout === "landscape") {
+    wrap.classList.add("work-body-gallery--landscape");
+  }
   wrap.setAttribute("role", "group");
   wrap.setAttribute("aria-label", "Project imagery — select to enlarge");
   list.forEach((item, i) => {
@@ -499,7 +503,7 @@ function appendBodyVideo(container, video) {
  * @param {unknown} bodyMedia
  */
 function bodyMediaSlotsByParagraph(bodyMedia) {
-  /** @type {Map<number, { images?: { src: string; alt?: string }[]; video?: { src: string; alt?: string } }>} */
+  /** @type {Map<number, { images?: { src: string; alt?: string }[]; video?: { src: string; alt?: string; scale?: number }; galleryLayout?: "phone" | "landscape" }>} */
   const map = new Map();
   if (!Array.isArray(bodyMedia)) return map;
   for (const block of bodyMedia) {
@@ -510,6 +514,10 @@ function bodyMediaSlotsByParagraph(bodyMedia) {
     if (!slot) {
       slot = {};
       map.set(idx, slot);
+    }
+    const layoutRaw = /** @type {{ galleryLayout?: unknown }} */ (block).galleryLayout;
+    if (layoutRaw === "landscape" || layoutRaw === "phone") {
+      slot.galleryLayout = layoutRaw;
     }
     const images = /** @type {{ images?: unknown }} */ (block).images;
     if (Array.isArray(images) && images.length) {
@@ -579,7 +587,7 @@ async function main() {
     p.textContent = paragraphs[i];
     bodyEl.appendChild(p);
     const slot = bodySlots.get(i);
-    appendBodyGallery(bodyEl, slot?.images || []);
+    appendBodyGallery(bodyEl, slot?.images || [], slot?.galleryLayout || "phone");
     appendBodyVideo(bodyEl, slot?.video);
   }
 
