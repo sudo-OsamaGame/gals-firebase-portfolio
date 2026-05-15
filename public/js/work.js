@@ -141,6 +141,8 @@ function attachPlaygroundDrag(el, item, stage, storageKey, onTap) {
 function openVideoDialog(src, title) {
   const dialog = document.createElement("dialog");
   dialog.className = "work-video-dialog";
+  const viewport = document.createElement("div");
+  viewport.className = "work-video-dialog__viewport";
   const vid = document.createElement("video");
   vid.src = src;
   vid.controls = true;
@@ -154,7 +156,8 @@ function openVideoDialog(src, title) {
   closeBtn.textContent = "Close";
   closeBtn.addEventListener("click", () => dialog.close());
   bar.appendChild(closeBtn);
-  dialog.appendChild(vid);
+  viewport.appendChild(vid);
+  dialog.appendChild(viewport);
   dialog.appendChild(bar);
   document.body.appendChild(dialog);
   dialog.addEventListener("close", () => {

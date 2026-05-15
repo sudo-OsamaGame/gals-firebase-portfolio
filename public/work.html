@@ -352,23 +352,40 @@
       }
 
       .work-video-dialog {
+        box-sizing: border-box;
         max-width: min(96vw, 900px);
-        width: 100%;
+        width: min(96vw, 900px);
+        max-height: min(92dvh, 900px);
+        margin: auto;
         border: none;
         border-radius: 14px;
         padding: 0;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
         background: var(--bg);
         color: var(--ink);
       }
       .work-video-dialog::backdrop {
         background: rgba(0, 0, 0, 0.72);
       }
+      .work-video-dialog__viewport {
+        flex: 1 1 auto;
+        min-height: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        background: #0a0a0a;
+      }
       .work-video-dialog video {
-        width: 100%;
-        height: auto;
         display: block;
+        max-width: 100%;
+        max-height: min(78dvh, calc(92dvh - 3.75rem));
+        width: auto;
+        height: auto;
+        object-fit: contain;
         vertical-align: middle;
-        border-radius: 14px 14px 0 0;
       }
       .work-video-dialog__bar {
         display: flex;
