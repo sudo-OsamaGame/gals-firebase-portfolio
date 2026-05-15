@@ -283,8 +283,7 @@
         background: transparent;
         line-height: 0;
       }
-      .sq-shape img,
-      .sq-shape video {
+      .sq-shape img {
         display: block;
         width: auto;
         height: auto;
@@ -318,9 +317,7 @@
         border: 2px solid rgba(255, 255, 255, 0.45);
       }
       .sq-shape:hover img,
-      .sq-shape:hover video,
-      .sq-shape:focus-visible img,
-      .sq-shape:focus-visible video {
+      .sq-shape:focus-visible img {
         transform: scale(1.12);
       }
       .sq-shape.is-dragging {
@@ -329,24 +326,20 @@
         outline: 2px solid color-mix(in srgb, var(--ink) 18%, transparent);
         outline-offset: 3px;
       }
-      html[data-theme="dark"] .sq-shape img,
-      html[data-theme="dark"] .sq-shape video {
+      html[data-theme="dark"] .sq-shape img {
         filter:
           drop-shadow(0 0 10px rgb(130 200 255 / 0.55))
           drop-shadow(0 0 22px rgb(100 175 255 / 0.42))
           drop-shadow(0 0 38px rgb(90 150 255 / 0.28));
       }
       html[data-theme="dark"] .sq-shape:hover img,
-      html[data-theme="dark"] .sq-shape:hover video,
-      html[data-theme="dark"] .sq-shape:focus-visible img,
-      html[data-theme="dark"] .sq-shape:focus-visible video {
+      html[data-theme="dark"] .sq-shape:focus-visible img {
         filter:
           drop-shadow(0 0 14px rgb(160 220 255 / 0.7))
           drop-shadow(0 0 28px rgb(120 195 255 / 0.5))
           drop-shadow(0 0 48px rgb(100 170 255 / 0.35));
       }
-      html[data-theme="dark"] .sq-shape.is-dragging img,
-      html[data-theme="dark"] .sq-shape.is-dragging video {
+      html[data-theme="dark"] .sq-shape.is-dragging img {
         filter:
           drop-shadow(0 0 18px rgb(190 235 255 / 0.85))
           drop-shadow(0 0 34px rgb(140 205 255 / 0.6))

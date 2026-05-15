@@ -132,6 +132,7 @@
             "label": "Gal Nakel — video",
             "kind": "video",
             "src": "/media/side-quests-playground/gal-nakel.mp4",
+            "poster": "/media/side-quests-playground/gal-nakel-poster.jpg",
             "defaultPosition": { "leftPct": 50, "topPct": 58 }
           },
           {
@@ -139,6 +140,7 @@
             "label": "I Think You Should Leave — intro",
             "kind": "video",
             "src": "/media/side-quests-playground/itysl-intro.mp4",
+            "poster": "/media/side-quests-playground/itysl-intro-poster.jpg",
             "defaultPosition": { "leftPct": 28, "topPct": 72 }
           }
         ]

@@ -219,7 +219,7 @@ function initSideQuestsPlayground(project, bodyEl, mediaEl) {
   };
 
   for (const raw of items) {
-    const item = /** @type {{ id: string, src?: string, label?: string, kind?: string, defaultPosition?: { leftPct?: number, topPct?: number } }} */ (
+    const item = /** @type {{ id: string, src?: string, poster?: string, label?: string, kind?: string, defaultPosition?: { leftPct?: number, topPct?: number } }} */ (
       raw
     );
     if (!item?.id || !item.src) continue;
@@ -235,17 +235,18 @@ function initSideQuestsPlayground(project, bodyEl, mediaEl) {
     btn.setAttribute("tabindex", "0");
 
     if (kind === "video") {
-      const vid = document.createElement("video");
-      vid.src = item.src;
-      vid.muted = true;
-      vid.playsInline = true;
-      vid.setAttribute("preload", "metadata");
-      vid.setAttribute("aria-hidden", "true");
+      const poster =
+        typeof item.poster === "string" && item.poster ? item.poster : "";
+      const thumb = document.createElement("img");
+      thumb.src = poster || item.src;
+      thumb.alt = "";
+      thumb.decoding = "async";
+      thumb.setAttribute("aria-hidden", "true");
       const badge = document.createElement("span");
       badge.className = "sq-shape__play-badge";
       badge.textContent = "▶";
       badge.setAttribute("aria-hidden", "true");
-      btn.appendChild(vid);
+      btn.appendChild(thumb);
       btn.appendChild(badge);
     } else {
       const img = document.createElement("img");
