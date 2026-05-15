@@ -71,7 +71,8 @@
           "afterParagraphIndex": 0,
           "video": {
             "src": "/media/smores-vid.mp4",
-            "alt": "S'mores app video walkthrough"
+            "alt": "S'mores app video walkthrough",
+            "scale": 0.6
           }
         }
       ],

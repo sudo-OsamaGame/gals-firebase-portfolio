@@ -470,12 +470,21 @@ function appendBodyGallery(container, images) {
 
 /**
  * @param {HTMLElement} container
- * @param {{ src: string; alt?: string } | null | undefined} video
+ * @param {{ src: string; alt?: string; scale?: number } | null | undefined} video
  */
 function appendBodyVideo(container, video) {
   if (!video?.src) return;
   const wrap = document.createElement("div");
   wrap.className = "work-body-video";
+  const scale =
+    typeof video.scale === "number" && video.scale > 0 && video.scale <= 1
+      ? video.scale
+      : null;
+  if (scale !== null) {
+    wrap.style.width = `${scale * 100}%`;
+    wrap.style.marginLeft = "auto";
+    wrap.style.marginRight = "auto";
+  }
   const v = document.createElement("video");
   v.src = video.src;
   v.controls = true;
@@ -511,9 +520,15 @@ function bodyMediaSlotsByParagraph(bodyMedia) {
       const src = /** @type {{ src?: unknown }} */ (vid).src;
       if (typeof src === "string" && src) {
         const alt = /** @type {{ alt?: unknown }} */ (vid).alt;
+        const scaleRaw = /** @type {{ scale?: unknown }} */ (vid).scale;
+        const scale =
+          typeof scaleRaw === "number" && scaleRaw > 0 && scaleRaw <= 1
+            ? scaleRaw
+            : undefined;
         slot.video = {
           src,
           alt: typeof alt === "string" ? alt : undefined,
+          scale,
         };
       }
     }
