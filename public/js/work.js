@@ -608,8 +608,21 @@ async function main() {
     mediaEl.appendChild(v);
   } else if (m?.src) {
     const img = document.createElement("img");
-    img.src = m.src;
+    const srcDark =
+      typeof m.srcDark === "string" && m.srcDark ? m.srcDark : "";
     img.alt = m.alt || project.title;
+    if (srcDark) {
+      img.dataset.heroTheme = "1";
+      img.dataset.heroLight = m.src;
+      img.dataset.heroDark = srcDark;
+      const theme =
+        document.documentElement.getAttribute("data-theme") === "dark"
+          ? "dark"
+          : "light";
+      img.src = theme === "dark" ? srcDark : m.src;
+    } else {
+      img.src = m.src;
+    }
     mediaEl.appendChild(img);
   }
 }

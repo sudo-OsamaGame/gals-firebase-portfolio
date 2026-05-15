@@ -108,6 +108,7 @@
       "media": {
         "type": "image",
         "src": "/media/exponential.png",
+        "srcDark": "/media/exponential-darkmode.png",
         "alt": "Exponential — logo",
         "transparentPanel": true
       }

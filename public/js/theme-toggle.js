@@ -6,6 +6,27 @@ const BANNER_DARK = "/media/banner-dark.png";
 /**
  * @param {"light" | "dark"} theme
  */
+/**
+ * @param {"light" | "dark"} theme
+ */
+function syncWorkHeroImage(theme) {
+  const img = document.querySelector("#work-media img[data-hero-theme]");
+  if (!(img instanceof HTMLImageElement)) return;
+  const light = img.dataset.heroLight;
+  const dark = img.dataset.heroDark;
+  if (!light || !dark) return;
+  const next = theme === "dark" ? dark : light;
+  try {
+    const abs = new URL(next, window.location.href).href;
+    if (img.src !== abs) img.src = next;
+  } catch {
+    img.src = next;
+  }
+}
+
+/**
+ * @param {"light" | "dark"} theme
+ */
 function syncHeroBanner(theme) {
   const el = document.querySelector(".hero-banner");
   if (!(el instanceof HTMLImageElement)) return;
@@ -43,6 +64,7 @@ export function applyTheme(theme) {
   }
 
   syncHeroBanner(t);
+  syncWorkHeroImage(t);
 
   document.querySelectorAll("[data-theme-toggle]").forEach((el) => {
     if (!(el instanceof HTMLElement)) return;
