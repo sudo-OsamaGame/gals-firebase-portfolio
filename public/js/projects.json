@@ -133,6 +133,13 @@
             "kind": "video",
             "src": "/media/side-quests-playground/gal-nakel.mp4",
             "defaultPosition": { "leftPct": 50, "topPct": 58 }
+          },
+          {
+            "id": "sq-itysl-intro",
+            "label": "I Think You Should Leave — intro",
+            "kind": "video",
+            "src": "/media/side-quests-playground/itysl-intro.mp4",
+            "defaultPosition": { "leftPct": 28, "topPct": 72 }
           }
         ]
       }
