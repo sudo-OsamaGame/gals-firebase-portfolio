@@ -74,6 +74,17 @@
             "alt": "S'mores app video walkthrough",
             "scale": 0.54
           }
+        },
+        {
+          "afterParagraphIndex": 1,
+          "images": [
+            { "src": "/media/smores-screenshots/screen-1.png", "alt": "S'mores app — screen 1" },
+            { "src": "/media/smores-screenshots/screen-2.png", "alt": "S'mores app — screen 2" },
+            { "src": "/media/smores-screenshots/screen-3.png", "alt": "S'mores app — screen 3" },
+            { "src": "/media/smores-screenshots/screen-4.png", "alt": "S'mores app — screen 4" },
+            { "src": "/media/smores-screenshots/screen-5.png", "alt": "S'mores app — screen 5" },
+            { "src": "/media/smores-screenshots/screen-6.png", "alt": "S'mores app — screen 6" }
+          ]
         }
       ],
       "media": {
