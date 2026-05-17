@@ -49,6 +49,13 @@
             { "src": "/media/zormim-app/iphone-4.png", "alt": "Zormim mobile app — screen 4" },
             { "src": "/media/zormim-app/iphone-5.png", "alt": "Zormim mobile app — screen 5" }
           ]
+        },
+        {
+          "afterParagraphIndex": 3,
+          "fullWidthImage": {
+            "src": "/media/zormim-chill-point.png",
+            "alt": "Zormim — Chill Point along the Yarkon"
+          }
         }
       ],
       "media": {
