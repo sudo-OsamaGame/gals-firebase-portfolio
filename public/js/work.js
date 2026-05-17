@@ -474,6 +474,30 @@ function appendBodyGallery(container, images, layout = "phone") {
 
 /**
  * @param {HTMLElement} container
+ * @param {{ src: string; alt?: string } | null | undefined} image
+ */
+function appendBodyFullWidthImage(container, image) {
+  if (!image?.src) return;
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "work-body-figure";
+  const label = image.alt?.trim() || "Project image — view larger";
+  btn.setAttribute("aria-label", label);
+  const img = document.createElement("img");
+  img.src = image.src;
+  img.alt = "";
+  img.setAttribute("aria-hidden", "true");
+  img.loading = "lazy";
+  img.decoding = "async";
+  btn.appendChild(img);
+  btn.addEventListener("click", () =>
+    openWorkLightbox([{ src: image.src, alt: image.alt || "" }], 0),
+  );
+  container.appendChild(btn);
+}
+
+/**
+ * @param {HTMLElement} container
  * @param {{ src: string; alt?: string; scale?: number } | null | undefined} video
  */
 function appendBodyVideo(container, video) {
@@ -503,7 +527,7 @@ function appendBodyVideo(container, video) {
  * @param {unknown} bodyMedia
  */
 function bodyMediaSlotsByParagraph(bodyMedia) {
-  /** @type {Map<number, { images?: { src: string; alt?: string }[]; video?: { src: string; alt?: string; scale?: number }; galleryLayout?: "phone" | "landscape" }>} */
+  /** @type {Map<number, { images?: { src: string; alt?: string }[]; video?: { src: string; alt?: string; scale?: number }; galleryLayout?: "phone" | "landscape"; fullWidthImage?: { src: string; alt?: string } }>} */
   const map = new Map();
   if (!Array.isArray(bodyMedia)) return map;
   for (const block of bodyMedia) {
@@ -537,6 +561,17 @@ function bodyMediaSlotsByParagraph(bodyMedia) {
           src,
           alt: typeof alt === "string" ? alt : undefined,
           scale,
+        };
+      }
+    }
+    const full = /** @type {{ fullWidthImage?: unknown }} */ (block).fullWidthImage;
+    if (full && typeof full === "object" && full !== null && "src" in full) {
+      const src = /** @type {{ src?: unknown }} */ (full).src;
+      if (typeof src === "string" && src) {
+        const alt = /** @type {{ alt?: unknown }} */ (full).alt;
+        slot.fullWidthImage = {
+          src,
+          alt: typeof alt === "string" ? alt : undefined,
         };
       }
     }
@@ -588,6 +623,7 @@ async function main() {
     bodyEl.appendChild(p);
     const slot = bodySlots.get(i);
     appendBodyGallery(bodyEl, slot?.images || [], slot?.galleryLayout || "phone");
+    appendBodyFullWidthImage(bodyEl, slot?.fullWidthImage);
     appendBodyVideo(bodyEl, slot?.video);
   }
 
