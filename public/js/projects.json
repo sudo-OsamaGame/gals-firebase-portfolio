@@ -103,8 +103,8 @@
       ],
       "media": {
         "type": "image",
-        "src": "/media/cloud-nine-art.png",
-        "alt": "Cloud Nine project",
+        "src": "/media/cloud-nine-logo.png",
+        "alt": "Cloud Nine — logo",
         "transparentPanel": true
       }
     },
