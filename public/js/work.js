@@ -440,7 +440,7 @@ function closeWorkLightbox() {
 /**
  * @param {HTMLElement} container
  * @param {{ src: string; alt?: string }[]} images
- * @param {"phone" | "landscape"} [layout]
+ * @param {"phone" | "landscape" | "portrait"} [layout]
  */
 function appendBodyGallery(container, images, layout = "phone") {
   if (!images?.length) return;
@@ -450,6 +450,8 @@ function appendBodyGallery(container, images, layout = "phone") {
   wrap.className = "work-body-gallery";
   if (layout === "landscape") {
     wrap.classList.add("work-body-gallery--landscape");
+  } else if (layout === "portrait") {
+    wrap.classList.add("work-body-gallery--portrait");
   }
   wrap.setAttribute("role", "group");
   wrap.setAttribute("aria-label", "Project imagery — select to enlarge");
@@ -527,7 +529,7 @@ function appendBodyVideo(container, video) {
  * @param {unknown} bodyMedia
  */
 function bodyMediaSlotsByParagraph(bodyMedia) {
-  /** @type {Map<number, { images?: { src: string; alt?: string }[]; video?: { src: string; alt?: string; scale?: number }; galleryLayout?: "phone" | "landscape"; fullWidthImage?: { src: string; alt?: string } }>} */
+  /** @type {Map<number, { images?: { src: string; alt?: string }[]; video?: { src: string; alt?: string; scale?: number }; galleryLayout?: "phone" | "landscape" | "portrait"; fullWidthImage?: { src: string; alt?: string } }>} */
   const map = new Map();
   if (!Array.isArray(bodyMedia)) return map;
   for (const block of bodyMedia) {
@@ -540,7 +542,7 @@ function bodyMediaSlotsByParagraph(bodyMedia) {
       map.set(idx, slot);
     }
     const layoutRaw = /** @type {{ galleryLayout?: unknown }} */ (block).galleryLayout;
-    if (layoutRaw === "landscape" || layoutRaw === "phone") {
+    if (layoutRaw === "landscape" || layoutRaw === "phone" || layoutRaw === "portrait") {
       slot.galleryLayout = layoutRaw;
     }
     const images = /** @type {{ images?: unknown }} */ (block).images;

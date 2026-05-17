@@ -141,6 +141,15 @@
       .work-body-gallery--landscape .work-body-gallery__thumb img {
         object-fit: contain;
       }
+      .work-body-gallery--portrait .work-body-gallery__thumb {
+        aspect-ratio: 3 / 4;
+        min-height: min(260px, 36dvh);
+        background: transparent;
+        box-shadow: 0 0 0 1px rgba(127, 127, 127, 0.22);
+      }
+      .work-body-gallery--portrait .work-body-gallery__thumb img {
+        object-fit: cover;
+      }
       .work-body-figure {
         margin: 0.35rem 0 1.1rem;
         width: 100%;
